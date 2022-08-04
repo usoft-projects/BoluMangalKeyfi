@@ -1,13 +1,13 @@
 
 function init(){
 var config = {
-    apiKey: "AIzaSyDAl-sAyQGr3tRpK5TwfPz5lVbfyvdD5TM",
-    authDomain: "onurfirebase-8f143.firebaseapp.com",
-    databaseURL: "https://onurfirebase-8f143.firebaseio.com",
-    projectId: "onurfirebase-8f143",
-    storageBucket: "onurfirebase-8f143.appspot.com",
-    messagingSenderId: "611179792299",
-    appId: "1:611179792299:web:dba6f8ab2cc03713c334ee"
+    apiKey: "AIzaSyDwzi9ETDKbMTkP4lWkAnd2Di6oMBSmA10",
+    authDomain: "bolumangalkeyfi-63388.firebaseapp.com",
+    databaseURL: "https://bolumangalkeyfi-63388-default-rtdb.firebaseio.com",
+    projectId: "bolumangalkeyfi-63388",
+    storageBucket: "bolumangalkeyfi-63388.appspot.com",
+    messagingSenderId: "547222676335",
+    appId: "1:547222676335:web:efa725ed4782066ac03e9a"
 };
 
 firebase.initializeApp(config);
