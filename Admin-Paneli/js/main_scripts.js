@@ -91,7 +91,7 @@ function update(d){
             var link_image = test.split("**")[5]
             var keys = test.split("**")[0]
             if (file === undefined) {
-                console.log("tanımsız")
+                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -109,7 +109,7 @@ function update(d){
                         location.reload();
                     })
               } else {
-                console.log("test")
+                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
                 var path = categories + "/" + name
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
@@ -134,7 +134,8 @@ function update(d){
                             })
                     })
                 }).catch(e =>{
-                    console.log("Error" + e)				
+                    console.log("Error" + e)
+                    Swal.fire("Hata"+e, '', 'warning')				
                 })
               }
         } else if (result.isDenied) {
@@ -209,6 +210,7 @@ function newmenu(){
             var file = document.getElementById("files").files[0]
             var path = categories + "/" + name
             if (file === undefined) {
+                    Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -225,6 +227,7 @@ function newmenu(){
                         location.reload();
                     })
               }else{
+                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 thisRef.put(file).then(res=>{
@@ -247,7 +250,8 @@ function newmenu(){
                             })
                     })
                 }).catch(e =>{
-                    console.log("Error" + e)				
+                    console.log("Error" + e)
+                    Swal.fire("Hata"+e, '', 'warning')				
                 })
         }
         } else if (result.isDenied) {
@@ -275,9 +279,9 @@ function newcategory(){
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+            Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
             local_storage = (JSON.stringify(local_storage))
             local_storage = (JSON.parse(local_storage))
-
             var cate = document.getElementById("cat").value;
             var name = document.getElementById("name").value
             var details = document.getElementById("details").value
@@ -302,6 +306,7 @@ function newcategory(){
                     location.reload();
                 })
             }else{
+                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 thisRef.put(file).then(res=>{
@@ -325,7 +330,8 @@ function newcategory(){
                         })
                     })
                 }).catch(e =>{
-                    console.log("Error" + e)				
+                    console.log("Error" + e)
+                    Swal.fire("Hata"+e, '', 'warning')			
                 })
 
         }
