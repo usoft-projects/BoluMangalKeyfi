@@ -260,8 +260,9 @@ function newmenu(){
       }) 
 }
 
-function newcategory(){
    
+function newcategory(){
+
     Swal.fire({
         title: "Yeni Kategori Ekle",
         html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Kategori Adı"> <br>'+
@@ -279,9 +280,9 @@ function newcategory(){
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
             local_storage = (JSON.stringify(local_storage))
             local_storage = (JSON.parse(local_storage))
+
             var cate = document.getElementById("cat").value;
             var name = document.getElementById("name").value
             var details = document.getElementById("details").value
@@ -306,7 +307,6 @@ function newcategory(){
                     location.reload();
                 })
             }else{
-                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 thisRef.put(file).then(res=>{
@@ -330,17 +330,15 @@ function newcategory(){
                         })
                     })
                 }).catch(e =>{
-                    console.log("Error" + e)
-                    Swal.fire("Hata"+e, '', 'warning')			
+                    console.log("Error" + e)				
                 })
 
         }
 
         } else if (result.isDenied) {
-          Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
+            Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
         }
-      })
-
+        })
         //     var to_save = firebase.database().ref();
         //     var data =[
         //         {
