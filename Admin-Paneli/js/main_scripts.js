@@ -387,3 +387,10 @@ function usoft(){
         imageAlt: 'Custom image',
       });
 }
+setInterval(
+    () => {
+        database.goOffline();
+        console.log("offline")
+    },
+    2000,
+)

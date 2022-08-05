@@ -55,3 +55,10 @@ function usoft(){
         imageAlt: 'Custom image',
       });
 }
+setInterval(
+    () => {
+        firebase.database().goOffline();
+        console.log("offline")
+    },
+    20000,
+)
