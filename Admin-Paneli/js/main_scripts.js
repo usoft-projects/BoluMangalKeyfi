@@ -12,8 +12,10 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 var ref = firebase.database().ref();
+
 var local_storage = []
 var keys2 =[]
+
 ref.on("value", function(snapshot) {
     var interface = document.getElementById("data_firebase")
     var test = snapshot.val()
@@ -21,6 +23,7 @@ ref.on("value", function(snapshot) {
     keys2=keys
     var datas =  Object.values(test) 
     local_storage = test
+    num = 5 + "test"
 
     //burası card.html ıcın
     // for(var i=0; i<keys.length; i++){
@@ -262,7 +265,6 @@ function newmenu(){
 
    
 function newcategory(){
-
     Swal.fire({
         title: "Yeni Kategori Ekle",
         html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Kategori Adı"> <br>'+
@@ -387,10 +389,3 @@ function usoft(){
         imageAlt: 'Custom image',
       });
 }
-setInterval(
-    () => {
-        database.goOffline();
-        console.log("offline")
-    },
-    2000,
-)

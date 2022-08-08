@@ -60,5 +60,5 @@ setInterval(
         firebase.database().goOffline();
         console.log("offline")
     },
-    15000,
+    10000,
 )
