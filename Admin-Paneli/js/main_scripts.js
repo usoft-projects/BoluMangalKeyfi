@@ -36,15 +36,16 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var ref = firebase.database().ref();
 
+
+
 var local_storage = []
 var keys2 =[]
-
 ref.on("value", function(snapshot) {
     var interface = document.getElementById("data_firebase")
     var test = snapshot.val()
     var keys = Object.keys(test);
     keys2=keys
-    var datas =  Object.values(test) 
+    var datas =  Object.values(test)  
     local_storage = test
     num = 5 + "test"
 
