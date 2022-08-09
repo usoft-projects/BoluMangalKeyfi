@@ -25,7 +25,7 @@ var config_2 = {
 var config_3 = { 
     apiKey: "AIzaSyDXzKWUxSJc0vpzsews9rhkkOi4MVrCK-Q",
     authDomain: "bolumangal-3.firebaseapp.com",
-    databaseURL: "https://bolumangalkeyfi-63388-default-rtdb.firebaseio.com",
+    databaseURL: "https://bolumangal-3-default-rtdb.firebaseio.com/",
     projectId: "bolumangal-3",
     storageBucket: "bolumangal-3.appspot.com",
     messagingSenderId: "388373510934",
@@ -132,6 +132,8 @@ function update(d){
                     local_storage[categories].splice(index, 0, data);
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
+                        update_2(local_storage)
+                        update_3(local_storage)
                         Swal.fire("Güncellendi.", '', 'info')
                         location.reload();
                     })
@@ -156,6 +158,8 @@ function update(d){
                             local_storage[categories].splice(index, 0, data);
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
+                                update_2(local_storage)
+                                update_3(local_storage)
                                 Swal.fire("Güncellendi.", '', 'info')
                                 location.reload();
                             })
@@ -192,6 +196,8 @@ function remove(d){
             local_storage[keys].splice(index,1)
             var ref = firebase.database().ref()
             ref.set(local_storage, function () {
+                remove_2(local_storage)
+                remove_3(local_storage)
                 Swal.fire("Menü Silindi.", '', 'info')
                 location.reload();
             })
@@ -250,6 +256,8 @@ function newmenu(){
                     local_storage[categories].push(data)
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
+                        update_2(local_storage)
+                        update_3(local_storage)
                         Swal.fire("Menü Eklendi.", '', 'info')
                         location.reload();
                     })
@@ -272,6 +280,8 @@ function newmenu(){
                             local_storage[categories].push(data)
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
+                                update_2(local_storage)
+                                update_3(local_storage)
                                 Swal.fire("Menü Eklendi", '', 'info')
                                 location.reload();
                             })
@@ -329,6 +339,8 @@ function newcategory(){
                 local_storage[cate] = data
                 console.log(local_storage)
                 to_save.set(local_storage, function () {
+                    update_2(local_storage)
+                    update_3(local_storage)
                     Swal.fire("Yeni kategori eklendi.", '', 'info')
                     location.reload();
                 })
@@ -351,6 +363,8 @@ function newcategory(){
                         local_storage[cate] = data
                         console.log(local_storage)
                         to_save.set(local_storage, function () {
+                            update_2(local_storage)
+                            update_3(local_storage)
                             Swal.fire("Yeni Kategori Eklendi.", '', 'info')
                             location.reload();
                         })
