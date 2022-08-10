@@ -24,3 +24,21 @@ function remove_3(veri){
         console.log("silindi")
     })
 }
+function image_3(path,file,file_name,data){
+
+    var to_save_image_3 = sube_3.storage().ref(path)
+    let thisRef_3 = to_save_image_3.child(file_name)
+
+    thisRef_3.put(file).then(res=>{
+        console.log("yüklendi")
+        to_save_image_3.child(file_name).getDownloadURL().then(url=>{
+            data.image = url
+            update_3(data)
+        })
+    }).catch(e =>{
+        console.log("Error" + e)
+        Swal.fire("Hata"+e, '', 'warning')				
+    })
+
+
+}

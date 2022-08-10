@@ -158,8 +158,10 @@ function update(d){
                             local_storage[categories].splice(index, 0, data);
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
-                                update_2(local_storage)
-                                update_3(local_storage)
+                                // update_2(local_storage)
+                                // update_3(local_storage)
+                                image_2(path,file,file.name,data)
+                                image_3(path,file,file.name,data)
                                 Swal.fire("Güncellendi.", '', 'info')
                                 location.reload();
                             })
@@ -280,8 +282,8 @@ function newmenu(){
                             local_storage[categories].push(data)
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
-                                update_2(local_storage)
-                                update_3(local_storage)
+                                image_2(path,file,file.name,data)
+                                image_3(path,file,file.name,data)
                                 Swal.fire("Menü Eklendi", '', 'info')
                                 location.reload();
                             })
@@ -363,8 +365,8 @@ function newcategory(){
                         local_storage[cate] = data
                         console.log(local_storage)
                         to_save.set(local_storage, function () {
-                            update_2(local_storage)
-                            update_3(local_storage)
+                            image_2(path,file,file.name,data)
+                            image_3(path,file,file.name,data)
                             Swal.fire("Yeni Kategori Eklendi.", '', 'info')
                             location.reload();
                         })
