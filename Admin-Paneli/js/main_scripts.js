@@ -154,7 +154,7 @@ function update(d){
                                 "price": parseFloat(price),
                                 "image": url
                                 }
-                            
+                             
                             local_storage[categories].splice(index, 0, data);
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
