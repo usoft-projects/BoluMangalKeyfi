@@ -365,8 +365,8 @@ function newcategory(){
                         local_storage[cate] = data
                         console.log(local_storage)
                         to_save.set(local_storage, function () {
-                            image_2(path,file,file.name,data)
-                            image_3(path,file,file.name,data)
+                            image_2_array(path,file,file.name,data)
+                            // image_3(path,file,file.name,data)
                             Swal.fire("Yeni Kategori Eklendi.", '', 'info')
                             location.reload();
                         })

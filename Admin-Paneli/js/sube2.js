@@ -25,13 +25,14 @@ function remove_2(veri){
         console.log("silindi")
     })
 }
+
 function image_2(path,file,file_name,data){
 
     var to_save_image_2 = sube_2.storage().ref(path)
     let thisRef_2 = to_save_image_2.child(file_name)
 
     thisRef_2.put(file).then(res=>{
-        console.log("yüklendi")
+        console.log("yüklendi sube_2")
         to_save_image_2.child(file_name).getDownloadURL().then(url=>{
             data.image = url
             update_2(data)
@@ -40,6 +41,21 @@ function image_2(path,file,file_name,data){
         console.log("Error" + e)
         Swal.fire("Hata"+e, '', 'warning')				
     })
+}
 
+function image_2_array(path,file,file_name,data){
 
+    var to_save_image_2 = sube_2.storage().ref(path)
+    let thisRef_2 = to_save_image_2.child(file_name)
+
+    thisRef_2.put(file).then(res=>{
+        console.log("yüklendi")
+        to_save_image_2.child(file_name).getDownloadURL().then(url=>{
+            data[0].image = url
+            update_2(data)
+        })
+    }).catch(e =>{
+        console.log("Error" + e)
+        Swal.fire("Hata"+e, '', 'warning')				
+    })
 }
