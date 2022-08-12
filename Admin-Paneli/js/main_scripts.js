@@ -15,7 +15,6 @@ var database = firebase.database();
 var ref = firebase.database().ref();
 
 
-
 var local_storage = []
 var keys2 =[]
 ref.on("value", function(snapshot) {
@@ -140,10 +139,10 @@ function update(d){
                                 // update_2(local_storage)
                                 // update_3(local_storage)
                                 image_2(path,file,file.name,data)
-                                image_3(path,file,file.name,data)
-                                image_4(path,file,file.name,data)
+                                // image_3(path,file,file.name,data)
+                                // image_4(path,file,file.name,data)
                                 Swal.fire("Güncellendi.", '', 'info')
-                                location.reload();
+                                // location.reload();
                             })
                     })
                 }).catch(e =>{
