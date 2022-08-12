@@ -10,28 +10,6 @@ var config = {
     appId: "1:547222676335:web:efa725ed4782066ac03e9a"
 };
 
-//DB-2 Config
-var config_2 = { 
-    apiKey: "AIzaSyAVHvAgxudBPJ-mu3uE-oiISXnUlmVcLU8",
-    authDomain: "bolumangal-2.firebaseapp.com",
-    databaseURL: "https://bolumangal-2-default-rtdb.firebaseio.com",
-    projectId: "bolumangal-2",
-    storageBucket: "bolumangal-2.appspot.com",
-    messagingSenderId: "745747594928",
-    appId: "1:745747594928:web:8453afe68b1bd49d55c575"
-};
-
-//DB-3 Config
-var config_3 = { 
-    apiKey: "AIzaSyDXzKWUxSJc0vpzsews9rhkkOi4MVrCK-Q",
-    authDomain: "bolumangal-3.firebaseapp.com",
-    databaseURL: "https://bolumangal-3-default-rtdb.firebaseio.com/",
-    projectId: "bolumangal-3",
-    storageBucket: "bolumangal-3.appspot.com",
-    messagingSenderId: "388373510934",
-    appId: "1:388373510934:web:5951d377529e868ab2ae37"
-};
-
 firebase.initializeApp(config);
 var database = firebase.database();
 var ref = firebase.database().ref();
@@ -134,6 +112,7 @@ function update(d){
                     to_save.set(local_storage, function () {
                         update_2(local_storage)
                         update_3(local_storage)
+                        update_4(local_storage)
                         Swal.fire("Güncellendi.", '', 'info')
                         location.reload();
                     })
@@ -162,6 +141,7 @@ function update(d){
                                 // update_3(local_storage)
                                 image_2(path,file,file.name,data)
                                 image_3(path,file,file.name,data)
+                                image_4(path,file,file.name,data)
                                 Swal.fire("Güncellendi.", '', 'info')
                                 location.reload();
                             })
@@ -200,6 +180,7 @@ function remove(d){
             ref.set(local_storage, function () {
                 remove_2(local_storage)
                 remove_3(local_storage)
+                remove_4(local_storage)
                 Swal.fire("Menü Silindi.", '', 'info')
                 location.reload();
             })
@@ -260,6 +241,7 @@ function newmenu(){
                     to_save.set(local_storage, function () {
                         update_2(local_storage)
                         update_3(local_storage)
+                        update_4(local_storage)
                         Swal.fire("Menü Eklendi.", '', 'info')
                         location.reload();
                     })
@@ -284,6 +266,7 @@ function newmenu(){
                             to_save.set(local_storage, function () {
                                 image_2(path,file,file.name,data)
                                 image_3(path,file,file.name,data)
+                                image_4(path,file,file.name,data)
                                 Swal.fire("Menü Eklendi", '', 'info')
                                 location.reload();
                             })
@@ -343,6 +326,7 @@ function newcategory(){
                 to_save.set(local_storage, function () {
                     update_2(local_storage)
                     update_3(local_storage)
+                    update_4(local_storage)
                     Swal.fire("Yeni kategori eklendi.", '', 'info')
                     location.reload();
                 })
