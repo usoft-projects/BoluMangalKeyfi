@@ -14,6 +14,48 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var ref = firebase.database().ref();
 
+//DB-2 Config
+var config_2 = { 
+    apiKey: "AIzaSyAVHvAgxudBPJ-mu3uE-oiISXnUlmVcLU8",
+    authDomain: "bolumangal-2.firebaseapp.com",
+    databaseURL: "https://bolumangal-2-default-rtdb.firebaseio.com",
+    projectId: "bolumangal-2",
+    storageBucket: "bolumangal-2.appspot.com",
+    messagingSenderId: "745747594928",
+    appId: "1:745747594928:web:8453afe68b1bd49d55c575"
+};
+// var sube_2 = firebase.initializeApp(config_2,"sube_2")
+// var db_2 = sube_2.database();
+// var re_2 = sube_2.database().ref();
+
+//DB-3 Config
+var config_3 = { 
+    apiKey: "AIzaSyDXzKWUxSJc0vpzsews9rhkkOi4MVrCK-Q",
+    authDomain: "bolumangal-3.firebaseapp.com",
+    databaseURL: "https://bolumangal-3-default-rtdb.firebaseio.com/",
+    projectId: "bolumangal-3",
+    storageBucket: "bolumangal-3.appspot.com",
+    messagingSenderId: "388373510934",
+    appId: "1:388373510934:web:5951d377529e868ab2ae37"
+};
+// var sube_3 = firebase.initializeApp(config_3,"sube_3")
+// var db_3 = sube_3.database();
+// var re_3 = sube_3.database().ref();
+
+//DB-4 Config
+var config_4 = {
+    apiKey: "AIzaSyBxcCRsiTQgFui1T5pF6ziHXAqdahpNGzM",
+    authDomain: "bolumangal-4.firebaseapp.com",
+    databaseURL: "https://bolumangal-4-default-rtdb.firebaseio.com",
+    projectId: "bolumangal-4",
+    storageBucket: "bolumangal-4.appspot.com",
+    messagingSenderId: "312801327244",
+    appId: "1:312801327244:web:3dd01af2ad40eb08b663a9"
+};
+// var sube_4 = firebase.initializeApp(config_4,"sube_4")
+// var db_4 = sube_4.database();
+// var re_4 = sube_4.database().ref();
+
 var local_storage = []
 var keys2 =[]
 ref.on("value", function(snapshot) {
@@ -23,26 +65,6 @@ ref.on("value", function(snapshot) {
     keys2=keys
     var datas =  Object.values(test)  
     local_storage = test
-    num = 5 + "test"
-
-    //burası card.html ıcın
-    // for(var i=0; i<keys.length; i++){
-    //     var header =  '<div class="col-lg-6"> <div class="card shadow mb-4"> <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> '+
-    //     '<h6 class="m-0 font-weight-bold text-primary">'+keys[i]+'</h6> <div class="dropdown no-arrow">Save and Other Options <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-    //     '<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> </a> <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"  aria-labelledby="dropdownMenuLink">'+
-    //     '<div class="dropdown-header">Settings:</div> <a class="dropdown-item" href="#">Add New Menu</a> <a class="dropdown-item" href="#">Save Categories</a> <a class="dropdown-item" href="#">Delete Items</a> <a class="dropdown-item" href="#">Delete Categories</a> <a class="dropdown-item" href="#">Change Categories Name</a>'+
-    //     '</div> </div> </div><div id="datas_menus"></div>' 
-
-    //     var insider = ""
-    //     for(var k=0; k<datas[i].length; k++){
-    //         insider += '<div class="card-body">  <input class="form-control" type="text" value="'+datas[i][k].name+
-    //         '" id="'+datas[i][k].name+'"><br><input class="form-control" type="text" value="'+datas[i][k].details+'" id="'+datas[i][k].details+'"><br><input class="form-control" type="number" value="'+
-    //         datas[i][k].price+'" id="'+datas[i][k].price+'"></div><hr>'
-    //     }
-    //     interface.innerHTML += header + insider +'</div> </div>'
-    // }
-    //card html son
-
     var interface_2 = document.getElementById("datas_menu")
     for(var i=0; i<keys.length; i++){
         for(var k=0; k<datas[i].length; k++){
@@ -54,6 +76,51 @@ ref.on("value", function(snapshot) {
 }, function (error) {
     console.log("Error: " + error.code);
 });
+
+var local_storage_2 =[]
+setTimeout(() => {
+    var sube_2 = firebase.initializeApp(config_2,"sube_2")
+    var db_2 = sube_2.database();
+    var re_2 = sube_2.database().ref();
+    re_2.on("value", function(snapshot) {
+        var test = snapshot.val()
+        var datas =  Object.values(test)  
+        local_storage_2 = test
+        console.log("Storage_2: ", local_storage_2)
+    }, function (error) {
+        console.log("Error: " + error.code);
+    });
+}, 2000);
+
+var local_storage_3 =[]
+setTimeout(() => {
+    var sube_3 = firebase.initializeApp(config_3,"sube_3")
+    var db_3 = sube_3.database();
+    var re_3 = sube_3.database().ref();
+    re_3.on("value", function(snapshot) {
+        var test = snapshot.val()
+        var datas =  Object.values(test)  
+        local_storage_3 = test
+        console.log("Storage_3: ", local_storage_3)
+    }, function (error) {
+        console.log("Error: " + error.code);
+    });
+}, 3000);
+
+var local_storage_4 =[]
+setTimeout(() => {
+    var sube_4 = firebase.initializeApp(config_4,"sube_4")
+    var db_4 = sube_4.database();
+    var re_4 = sube_4.database().ref();
+    re_4.on("value", function(snapshot) {
+        var test = snapshot.val()
+        var datas =  Object.values(test)  
+        local_storage_4 = test
+        console.log("Storage_4: ", local_storage_4)
+    }, function (error) {
+        console.log("Error: " + error.code);
+    });
+}, 4000);
 
 //test.split("**")[0] --> key or categories
 
@@ -93,7 +160,6 @@ function update(d){
             var file = document.getElementById("files").files[0]
             var link_image = test.split("**")[5]
             var keys = test.split("**")[0]
-            var  others = local_storage
             if (file === undefined) {
                 Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
@@ -107,15 +173,12 @@ function update(d){
 
                     local_storage[keys].splice(index,1)
                     local_storage[categories].splice(index, 0, data);
-                    console.log(local_storage)
                     to_save.set(local_storage, function () {
-                        setTimeout(() => { update_2(others,data,index,keys,categories)}, 1500);
-                        setTimeout(() => { update_3(others,data,index,keys,categories)}, 2500);
-                        setTimeout(() => { update_4(others,data,index,keys,categories) 
-                            Swal.fire("Güncellendi.", '', 'info')
-                        }, 3500);
-                        
-                        // location.reload();
+                        update_2(local_storage)
+                        update_3(local_storage)
+                        update_4(local_storage)
+                        Swal.fire("Güncellendi.", '', 'info')
+                        location.reload();
                     })
               } else {
                 Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
@@ -140,9 +203,8 @@ function update(d){
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
                                 
-                                setTimeout(() => {  image_2(path,file,file.name,data,others,index,categories,keys) }, 1500);
-                                setTimeout(() => {  image_3(path,file,file.name,data,others,index,categories,keys) }, 2500);
-                                setTimeout(() => {  image_4(path,file,file.name,data,others,index,categories,keys) }, 3500);
+                                setTimeout(() => {  image_2(path,file,file.name,data,others,index,categories) }, 1500);
+                                setTimeout(() => {  image_3(path,file,file.name,data,others,index,categories) }, 2500);
                                 // image_4(path,file,file.name,data)
                                 Swal.fire("Güncellendi.", '', 'info')
                                 // location.reload();
@@ -203,7 +265,7 @@ function newmenu(){
     }
     drop += '</select>'
 
-    Swal.fire({ 
+    Swal.fire({
         title: "Yeni Menü Ekle",
         html: drop +'<br><br>'+
             '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İsim"> <br>'+
@@ -243,14 +305,17 @@ function newmenu(){
                     local_storage[categories].push(data)
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
-                        setTimeout(() => { new_menu_2(local_storage)},1500)
-                        Swal.fire("Menü Eklendi. Sube-1", '', 'info')
+                        update_2(local_storage)
+                        update_3(local_storage)
+                        update_4(local_storage)
+                        Swal.fire("Menü Eklendi.", '', 'info')
+                        location.reload();
                     })
               }else{
                 Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
-                var others = local_storage
+                var others = 
                 thisRef.put(file).then(res=>{
                     Swal.fire("Resim Yüklendi. Lütfen Bekleyiniz.", '', 'warning')
                     to_save_image.child(file.name).getDownloadURL().then(url=>{
@@ -266,8 +331,10 @@ function newmenu(){
                             local_storage[categories].push(data)
                             console.log(local_storage)
                             to_save.set(local_storage, function () {
-                                setTimeout(() => {  new_menu_2_img(path,file,file.name,others,data,categories) }, 1500);
+                                setTimeout(() => {  image_2(path,file,file.name,data,others,index,categories) }, 1500);
+                                setTimeout(() => {  image_3(path,file,file.name,data,others,index,categories) }, 2500);
                                 Swal.fire("Menü Eklendi", '', 'info')
+                                setTimeout(() => {  location.reload() }, 4500);
                             })
                     })
                 }).catch(e =>{

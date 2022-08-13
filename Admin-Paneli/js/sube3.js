@@ -11,11 +11,25 @@ var sube_3 = firebase.initializeApp(config_3,"sube_3")
 var db = sube_3.database();
 var re = sube_3.database().ref();
 
-function update_3(veri){
+function update_3(local_storage,data,index,keys,categories){
     var to_save_3 = sube_3.database().ref();
-    to_save_3.set(veri, function () {
-        console.log("sube2 dones")
-    })
+    var url_3 = data.image
+    if(url_3.includes("bolumangalkeyfi-63388")=== true){
+        url_3 = url_3.replace("bolumangalkeyfi-63388", "bolumangal-3")
+        data.image = url_3 
+        local_storage[keys].splice(index,1)
+        local_storage[categories].splice(index, 0, data)
+        to_save_3.set(local_storage, function () {
+            console.log("sube3 dones")
+        })
+    }else{
+        local_storage[keys].splice(index,1)
+        local_storage[categories].splice(index, 0, data)
+        to_save_3.set(local_storage, function () {
+            console.log("sube3 dones")
+        })
+    }
+
 }
 
 function remove_3(veri){
@@ -24,21 +38,41 @@ function remove_3(veri){
         console.log("silindi")
     })
 }
-function image_3(path,file,file_name,data){
+
+function image_3(path,file,file_name,data,local_storage,index,categories,keys){
 
     var to_save_image_3 = sube_3.storage().ref(path)
     let thisRef_3 = to_save_image_3.child(file_name)
-
+    // local_storage[categories].splice(index,1)
     thisRef_3.put(file).then(res=>{
-        console.log("yüklendi")
+        local_storage[categories].splice(index,1)
+        console.log("yüklendi sube_3")
         to_save_image_3.child(file_name).getDownloadURL().then(url=>{
             data.image = url
-            update_3(data)
+            local_storage[categories].splice(index, 0, data);
+            update_3(local_storage,data,index,keys,categories)
         })
     }).catch(e =>{
         console.log("Error" + e)
         Swal.fire("Hata"+e, '', 'warning')				
     })
+}
 
+function image_3_array(path,file,file_name,data,local_storage,index,categories){
 
+    var to_save_image_3 = sube_3.storage().ref(path)
+    let thisRef_3 = to_save_image_3.child(file_name)
+    // local_storage[categories].splice(index,1)
+    thisRef_3.put(file).then(res=>{
+        local_storage[categories].splice(index,1)
+        console.log("yüklendi sube_3")
+        to_save_image_3.child(file_name).getDownloadURL().then(url=>{
+            data[0].image = url
+            local_storage[categories].splice(index, 0, data);
+            update_2(local_storage)
+        })
+    }).catch(e =>{
+        console.log("Error" + e)
+        Swal.fire("Hata"+e, '', 'warning')				
+    })
 }
