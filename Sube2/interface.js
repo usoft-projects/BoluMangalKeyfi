@@ -34,7 +34,7 @@ ref.on("value", function(snapshot) {
     list_menu.innerHTML = ""
     for(var i=0; i<keys.length;i++){
         for(var k=0; k<datas[i].length;k++){
-             list_menu.innerHTML += '<div class="col-lg-6 menu-item filter-'+keys[i]+'" id="'+keys[i]+'"> <img src="'+datas[i][k].image+'" class="menu-img" alt=""> <div class="menu-content">'+
+             list_menu.innerHTML += '<div class="col-lg-6 menu-item filter-'+keys[i]+'" id="'+keys[i]+'"> <img src="'+datas[i][k].image+'" class="menu-img" alt="" id="'+datas[i][k].image+'" onclick=picture_open(this)> <div class="menu-content">'+
             '<a href="#">'+datas[i][k].name+'</a><span>'+datas[i][k].price+' TL</span></div> <div class="menu-ingredients">'+datas[i][k].details+'</div></div>'
         
         }
@@ -52,6 +52,15 @@ function usoft(){
         title: 'USoft - <b><u>USoft the clear choice</b></u> ',
         html:"You can reach us at <a href='mailto:usoft-projects@gmail.com'><b><u> this address.</b></u></a> <br> <p>&copy;Copyright 2022. All Rights Reserved.<br> <b>USoft </b></p>",
         imageUrl: '../assets/img/rocket.png',
+        imageAlt: 'Custom image',
+      });
+}
+function picture_open(d){
+    var url = d.id
+    Swal.fire({
+        toast: true,
+        title: 'Menü Resmi',
+        imageUrl: url,
         imageAlt: 'Custom image',
       });
 }
