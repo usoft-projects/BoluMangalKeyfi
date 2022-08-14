@@ -208,8 +208,7 @@ function newmenu(){
         html: drop +'<br><br>'+
             '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İsim"> <br>'+
             '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" ><br>'+
-            '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
+            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" ><br>',
         imageUrl: 'http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/logo_bolu_mangal_keyfi1.png',
         imageWidth: 400,
         imageHeight: 200,
@@ -227,7 +226,8 @@ function newmenu(){
             var name = document.getElementById("name").value
             var details = document.getElementById("details").value
             var price = document.getElementById("price").value
-            var file = document.getElementById("files").files[0]
+            // var file = document.getElementById("files").files[0]
+            var file = undefined
             var path = categories + "/" + name
             if (file === undefined) {
                     Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
@@ -244,6 +244,8 @@ function newmenu(){
                     console.log(local_storage)
                     to_save.set(local_storage, function () {
                         setTimeout(() => { new_menu_2(local_storage)},1500)
+                        setTimeout(() => { new_menu_3(local_storage)},2500)
+                        setTimeout(() => { new_menu_4(local_storage)},3500)
                         Swal.fire("Menü Eklendi. Sube-1", '', 'info')
                     })
               }else{
@@ -288,8 +290,8 @@ function newcategory(){
         html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Kategori Adı"> <br>'+
             '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İlk Menü Adı"> <br>'+ 
             '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat"> <br>'+
-            '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
+            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat"> <br>',
+            // '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
         imageUrl: 'http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/logo_bolu_mangal_keyfi1.png',
         imageWidth: 400,
         imageHeight: 200,
@@ -307,7 +309,8 @@ function newcategory(){
             var name = document.getElementById("name").value
             var details = document.getElementById("details").value
             var price = document.getElementById("price").value
-            var file = document.getElementById("files").files[0]
+            // var file = document.getElementById("files").files[0]
+            var file = undefined
             var path = cate + "/" + name
             if (file === undefined) {
                     var to_save = firebase.database().ref();
@@ -323,11 +326,11 @@ function newcategory(){
                 local_storage[cate] = data
                 console.log(local_storage)
                 to_save.set(local_storage, function () {
-                    update_2(local_storage)
-                    update_3(local_storage)
-                    update_4(local_storage)
+                    setTimeout(() => { new_cate_2(local_storage)},1500)
+                    setTimeout(() => { new_cate_3(local_storage)},1500)
+                    setTimeout(() => { new_cate_4(local_storage)},1500)
                     Swal.fire("Yeni kategori eklendi.", '', 'info')
-                    location.reload();
+                    // location.reload();
                 })
             }else{
                 var to_save_image = firebase.storage().ref(path)

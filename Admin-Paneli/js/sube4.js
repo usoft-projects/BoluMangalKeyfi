@@ -57,3 +57,17 @@ function image_4(path,file,file_name,data,local_storage,index,categories,keys){
         Swal.fire("Hata"+e, '', 'warning')				
     })
 }
+
+function new_menu_4(local_storage){
+    var to_save_4 = sube_4.database().ref();
+    to_save_4.set(local_storage, function () {
+        Swal.fire("Menü Eklendi. Sube-4 ", '', 'info')
+    })
+}
+
+function new_cate_4(local_storage){
+var to_save_4 = sube_4.database().ref();
+to_save_4.set(local_storage, function () {
+    Swal.fire("Kategori Eklendi. Sube-4 ", '', 'info')
+})
+}

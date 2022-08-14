@@ -33,13 +33,6 @@ function update_2(local_storage,data,index,keys,categories){
 
 }
 
-function remove_2(veri){
-    var re = sube_2.database().ref();
-    re.set(veri, function () {
-        console.log("silindi")
-    })
-}
-
 function image_2(path,file,file_name,data,local_storage,index,categories,keys){
 
     var to_save_image_2 = sube_2.storage().ref(path)
@@ -60,30 +53,23 @@ function image_2(path,file,file_name,data,local_storage,index,categories,keys){
 }
 
 function new_menu_2(local_storage){
-
         var to_save_2 = sube_2.database().ref();
         to_save_2.set(local_storage, function () {
             Swal.fire("Menü Eklendi. Sube-2 ", '', 'info')
         })
 }
-function new_menu_2_img(path,file,file_name,local_storage,data,categories){
-    var to_save_image_2 = sube_2.storage().ref(path)
-    let thisRef_2 = to_save_image_2.child(file_name)
-    thisRef_2.put(file).then(res=>{
-        console.log("image eklendi, sube-2")
-        to_save_image_2.child(file.name).getDownloadURL().then(url=>{
-            data.image = url
-            var to_save_2 = sube_2.database().ref();
-            local_storage[categories].push(data)
-            to_save_2.set(local_storage, function () {
-                console.log("menu eklendi, sube-2")
-            })
-        })
 
-    }).catch(e =>{
-        console.log("Error" + e)
-        Swal.fire("Hata"+e, '', 'warning')				
+function new_cate_2(local_storage){
+    var to_save_2 = sube_2.database().ref();
+    to_save_2.set(local_storage, function () {
+        Swal.fire("Kategori Eklendi. Sube-2 ", '', 'info')
     })
+}
 
 
+function remove_2(veri){
+    var re = sube_2.database().ref();
+    re.set(veri, function () {
+        console.log("silindi")
+    })
 }

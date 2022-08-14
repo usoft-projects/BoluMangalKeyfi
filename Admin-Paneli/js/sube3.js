@@ -32,13 +32,6 @@ function update_3(local_storage,data,index,keys,categories){
 
 }
 
-function remove_3(veri){
-    var re = sube_3.database().ref();
-    re.set(veri, function () {
-        console.log("silindi")
-    })
-}
-
 function image_3(path,file,file_name,data,local_storage,index,categories,keys){
 
     var to_save_image_3 = sube_3.storage().ref(path)
@@ -58,21 +51,23 @@ function image_3(path,file,file_name,data,local_storage,index,categories,keys){
     })
 }
 
-function image_3_array(path,file,file_name,data,local_storage,index,categories){
+function new_menu_3(local_storage){
+    var to_save_3 = sube_3.database().ref();
+    to_save_3.set(local_storage, function () {
+        Swal.fire("Menü Eklendi. Sube-3 ", '', 'info')
+    })
+}
 
-    var to_save_image_3 = sube_3.storage().ref(path)
-    let thisRef_3 = to_save_image_3.child(file_name)
-    // local_storage[categories].splice(index,1)
-    thisRef_3.put(file).then(res=>{
-        local_storage[categories].splice(index,1)
-        console.log("yüklendi sube_3")
-        to_save_image_3.child(file_name).getDownloadURL().then(url=>{
-            data[0].image = url
-            local_storage[categories].splice(index, 0, data);
-            update_2(local_storage)
-        })
-    }).catch(e =>{
-        console.log("Error" + e)
-        Swal.fire("Hata"+e, '', 'warning')				
+function new_cate_3(local_storage){
+var to_save_3 = sube_3.database().ref();
+to_save_3.set(local_storage, function () {
+    Swal.fire("Kategori Eklendi. Sube-3 ", '', 'info')
+})
+}
+
+function remove_3(veri){
+    var re = sube_3.database().ref();
+    re.set(veri, function () {
+        console.log("silindi")
     })
 }
