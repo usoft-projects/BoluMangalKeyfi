@@ -95,7 +95,7 @@ function update(d){
             var keys = test.split("**")[0]
             var  others = local_storage
             if (file === undefined) {
-                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
+                Swal.fire("Güncelleniyor Bekleyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -113,7 +113,7 @@ function update(d){
                         location.reload();
                     })
               } else {
-                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
+                Swal.fire("Güncelleniyor Bekleyiniz.", '', 'info')
                 var path = categories + "/" + name
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
@@ -218,7 +218,7 @@ function newmenu(){
             // var file = undefined
             var path = categories + "/" + name
             if (file === undefined) {
-                    Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
+                    Swal.fire("Ekleniyor Bekleyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -234,7 +234,7 @@ function newmenu(){
                         Swal.fire("Menü Eklendi.", '', 'info')
                     })
               }else{
-                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
+                Swal.fire("Ekleniyor Bekleyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 var others = local_storage
