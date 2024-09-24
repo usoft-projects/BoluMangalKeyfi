@@ -1,7 +1,13 @@
 //Configs
 //DB-1 Config
 var config = {
-//fr config
+    apiKey: "AIzaSyDwzi9ETDKbMTkP4lWkAnd2Di6oMBSmA10",
+    authDomain: "bolumangalkeyfi-63388.firebaseapp.com",
+    databaseURL: "https://bolumangalkeyfi-63388-default-rtdb.firebaseio.com",
+    projectId: "bolumangalkeyfi-63388",
+    storageBucket: "bolumangalkeyfi-63388.appspot.com",
+    messagingSenderId: "547222676335",
+    appId: "1:547222676335:web:efa725ed4782066ac03e9a"
 };
 firebase.initializeApp(config);
 var database = firebase.database();

@@ -1,7 +1,13 @@
 
 function init() {
     var config = {
-//fr config
+        apiKey: "AIzaSyBxcCRsiTQgFui1T5pF6ziHXAqdahpNGzM",
+        authDomain: "bolumangal-4.firebaseapp.com",
+        databaseURL: "https://bolumangal-4-default-rtdb.firebaseio.com",
+        projectId: "bolumangal-4",
+        storageBucket: "bolumangal-4.appspot.com",
+        messagingSenderId: "312801327244",
+        appId: "1:312801327244:web:3dd01af2ad40eb08b663a9"
     };
 
     firebase.initializeApp(config);
