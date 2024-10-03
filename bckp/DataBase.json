@@ -1,0 +1,258 @@
+{
+  "Et Çeşitleri": [
+    {
+      "details": "1.5 Porsiyon - 97 TL <br> Kilogram - 288 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kofte.jpg",
+      "name": "Köfte",
+      "price": 65
+    },
+    {
+      "details": "1.5 Porsiyon - 102 TL <br> Kilogram - 304 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/acili-kofte.jpg",
+      "name": "Acılı Köfte",
+      "price": 68
+    },
+    {
+      "details": "1.5 Porsiyon - 102 TL <br> Kilogram - 304 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-kofte.jpg",
+      "name": "Kaşarlı Köfte",
+      "price": 68
+    },
+    {
+      "details": "1.5 Porsiyon - 96 TL <br> Kilogram - 256 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/tavuk-kanat.jpg",
+      "name": "Tavuk Kanat",
+      "price": 64
+    },
+    {
+      "details": "1.5 Porsiyon - 94 TL <br> Kilogram - 252 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/tavuk-sis.jpg",
+      "name": "Tavuk Şiş",
+      "price": 63
+    },
+    {
+      "details": "1.5 Porsiyon - 114 TL <br> Kilogram - 304 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/sucuk.jpg",
+      "name": "Sucuk",
+      "price": 76
+    },
+    {
+      "details": "1.5 Porsiyon - 130 TL",
+      "image": "",
+      "name": "Beyti",
+      "price": 87
+    },
+    {
+      "details": "1.5 Porsiyon - 120 TL <br> Kilogram - 400 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/adana.jpg",
+      "name": "Adana ",
+      "price": 80
+    },
+    {
+      "details": "1.5 Porsiyon - 165 TL <br> Kilogram - 440 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kulbasti-1.jpg",
+      "name": "Külbastı",
+      "price": 110
+    },
+    {
+      "details": "1.5 Porsiyon - 147 TL <br> Kilogram - 490 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kuzu-sis.jpg",
+      "name": "Kuzu Şiş",
+      "price": 98
+    },
+    {
+      "details": "1.5 Porsiyon - 183 TL <br> Kilogram - 488 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/08pirzola.jpg",
+      "name": "Pirzola",
+      "price": 122
+    },
+    {
+      "details": "1.5 Porsiyon - 147 TL <br> Kilogram - 392 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kaburga.jpg",
+      "name": "Kaburga",
+      "price": 98
+    },
+    {
+      "details": "1.5 Porsiyon - 237 TL <br> Kilogram - 632 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/lokum.jpg",
+      "name": "Lokum",
+      "price": 158
+    },
+    {
+      "details": "Adet",
+      "image": "",
+      "name": "İçli Köfte",
+      "price": 22
+    },
+    {
+      "details": "1.5 Porsiyon - 133 TL",
+      "image": "",
+      "name": "İskender",
+      "price": 37
+    },
+    {
+      "details": "1.5 Porsiyon - 108 TL <br> Kilogram - 720 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/et-doner.jpg",
+      "name": "Et Döner",
+      "price": 72
+    },
+    {
+      "details": "1.5 Porsiyon - 162 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kuzu-sis.jpg",
+      "name": "Et Çöp Şiş",
+      "price": 108
+    }
+  ],
+  "Cajun Menü": [
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kiymali-pide.jpg",
+      "name": "4'lü Menü ",
+      "price": 45
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/08/bicakarasi.jpg",
+      "name": "6'lı Menü",
+      "price": 50
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/08/bicakarasi.jpg",
+      "name": "8'li Menü",
+      "price": 55
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Litre içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "750 gr Cajun Menü",
+      "price": 145
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Litre içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "500 gr Cajun Menü",
+      "price": 99
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Litre içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "1 kg Cajun Menü",
+      "price": 180
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "Hamburger Menü",
+      "price": 47.50
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "Tavuk Burger Menü",
+      "price": 44
+    },
+    {
+      "details": "Patates Kızartması, Soğan Halkası, Kutu içecek",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kasarli-pide.jpg",
+      "name": "Cajun Burger Menü",
+      "price": 44
+    }
+  ],
+  "Salata ve Aparatifler": [
+    {
+      "details": "1.5 Porsiyon - 21 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/1corba.jpg",
+      "name": "Çorba",
+      "price": 17
+    },
+    {
+      "details": "1.5 Porsiyon - 40 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/2salata.jpg",
+      "name": "Salata",
+      "price": 25
+    },
+    {
+      "details": "1.5 Porsiyon - 40 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/4piyaz.jpg",
+      "name": "Piyaz",
+      "price": 25
+    },
+    {
+      "details": "Çömlek Yoğurt",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/5yogurt.jpg",
+      "name": "Çömlek Yoğurt",
+      "price": 26
+    },
+    {
+      "details": "1.5 Porsiyon - 44 TL",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/6patates.jpg",
+      "name": "Kızarmış Patates",
+      "price": 26
+    }
+  ],
+  "Tatlılar": [
+    {
+      "details": "Ekmek Kadayıfı",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/ekmektatlisi.jpg",
+      "name": "Ekmek Kadayıfı",
+      "price": 30
+    },
+    {
+      "details": "Sütlü Kadayıf",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/suetluekadayif.jpg",
+      "name": "Sütlü Kadayıf",
+      "price": 30
+    },
+    {
+      "details": "Kabak Tatlısı",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/kabaktatlisi.jpg",
+      "name": "Kabak Tatlısı",
+      "price": 30
+    },
+    {
+      "details": "Sütlaç",
+      "image": "http://www.bolumangalkeyfi.com/wp-content/uploads/2018/05/sutlac.jpg",
+      "name": "Sütlaç",
+      "price": 30
+    }
+  ],
+  "İçecekler": [
+    {
+      "details": "1 LT",
+      "image": "",
+      "name": "Kola / Ayran",
+      "price": 28.5
+    },
+    {
+      "details": "Tombul Ayran",
+      "image": "",
+      "name": "Tombul Ayran",
+      "price": 15
+    },
+    {
+      "details": "Kutu İçecekler",
+      "image": "",
+      "name": "Kutu İçecekler",
+      "price": 15
+    },
+    {
+      "details": "Şalgam Suyu",
+      "image": "",
+      "name": "Şalgam Suyu",
+      "price": 15
+    },
+    {
+      "details": "Soda",
+      "image": "",
+      "name": "Soda",
+      "price": 10
+    },
+    {
+      "details": "Su",
+      "image": "",
+      "name": "Su",
+      "price": 5
+    }
+  ]
+}

@@ -127,14 +127,32 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow border-bottom-primary">
-                    <img src="../assets/img/apple-touch-icon.png" height="60px"> 
+                    <img src="img/logo.png" height="60px"> 
                         <h1 class="h3 mb-0 text-gray-800">Restoran Yönetim Paneli</h1>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bolu Mangal Admin</span>
+                                    <img class="img-profile rounded-circle"
+                                        src="./img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" id="lgi-lgo">
+                                        <!-- <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Çıkış -->
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                     <div id="frame_overview"  style="width:100%; height:100%">
-                        <iframe  title="Restaurant Overview" allow="fullscreen" src="../index_phone.html" width="100%" height="100%"></iframe>
+                        <iframe  title="Restaurant Overview" allow="fullscreen" src="index_phone.html" width="100%" height="100%"></iframe>
                     </div>
                     
 
@@ -164,14 +182,74 @@
 </body>
 <script>
     function usoft(){
-    Swal.fire({
-        toast: true,
-        title: 'USoft - <b><u>USoft the clear choice</b></u> ',
-        html:"You can reach us at <a href='mailto:usoft-projects@gmail.com'><b><u> this address.</b></u></a> <br> <p>&copy;Copyright 2022. All Rights Reserved.<br> <b>USoft </b></p>",
-        imageUrl: 'img/rocket.png',
-        imageAlt: 'Custom image',
-      });
-}
+        Swal.fire({
+            toast: true,
+            title: 'USoft - <b><u>USoft the clear choice</b></u> ',
+            html:"You can reach us at <a href='mailto:usoft-projects@gmail.com'><b><u> this address.</b></u></a> <br> <p>&copy;Copyright 2024. All Rights Reserved.<br> <b>USoft </b></p>",
+            imageUrl: 'img/rocket.png',
+            imageAlt: 'Custom image',
+        });
+    }
 
+    function lgi_lgo(){
+
+        var cntrl_lgi = document.getElementById("lgi-lgo")
+        var lg = localStorage.getItem("lg");
+        if (lg === "basarili"){
+            cntrl_lgi.innerHTML = '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Çikis'
+        }else {
+            cntrl_lgi.innerHTML = '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Giriş'
+            
+            Swal.fire({
+                title: "Menü Erişim",
+                html:'<input type="text" class="form-control" id="klcd" aria-describedby="Categories" placeholder="Kullanıcı Adı"> <br>'+
+                    '<input type="password" class="form-control" id="sfr" aria-describedby="Name" placeholder="Şifre"> <br>',
+                    // '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
+                imageUrl: 'img/logo.png',
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showCancelButton: true,
+                confirmButtonText: 'Giriş',
+                cancelButtonText: 'İptal',
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var klcd = document.getElementById("klcd").value;
+                        var sfr = document.getElementById("sfr").value
+                        var chck = document.getElementById("flexCheckDefault")
+                        if (klcd === "bolu"  && sfr  === "Rö01011955") {
+                            Swal.fire({
+                                toast: true,
+                                html:"Giris Basarılı",
+                                imageUrl: 'img/logo.png',
+                                imageAlt: 'Custom image',
+                            });
+                            console.log("girisbasarili")
+                            localStorage.setItem("lg", "basarili"); 
+                            cntrl_lgi.innerHTML = '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Çikis' 
+                        }
+                        else{
+                            Swal.fire({
+                                title: "Giriş Başarısız",
+                                text: "Kullanıcı Adı veya Şifre Yanlış",
+                                icon: "error"
+                            }).then((result) => {
+                                localStorage.setItem("lg", 0);
+                                lgi_lgo()
+                            });
+                        }
+                    }
+            })
+        }
+
+        if (cntrl_lgi.innerHTML == '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Çikis') {
+            cntrl_lgi.addEventListener('click', e => { 
+                localStorage.setItem("lg", 0);
+                cntrl_lgi.innerHTML = '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Giriş'
+            }) 
+        }
+    }
+    lgi_lgo()
 </script>
 </html>

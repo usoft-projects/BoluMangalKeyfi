@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link href="../img/rocket.png" rel="icon">
     <link href="../img/rocket.png" rel="apple-touch-icon">
-    <title>USoft - Restoran Yönetim Sistemi</title>
+    <title>Bolu Mangal Keyfi - Balgat Menu</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css">
@@ -74,37 +74,43 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <a class="collapse-item" href="../Sube1/tablesTr.html">Çayyolu Şubesi, Şube-1</a> -->
+                        <!-- <a class="collapse-item" href="Sube1/tablesTr.html">Çayyolu Şubesi, Şube-1</a> -->
                         <a class="collapse-item" href="../Sube1/tablesTr.html">Çayyolu Şubesi</a>
+
                         <!-- <a class="collapse-item" href="cards.html">Images</a>
                         <a class="collapse-item" href="cards.html">Price</a> -->
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <a class="collapse-item" href="../Sube2/tablesTr.html">Şaşmaz Şubesi, Şube-2</a> -->
+                        <!-- <a class="collapse-item" href="Sube2/tablesTr.html">Şaşmaz Şubesi, Şube-2</a> -->
                         <a class="collapse-item" href="../Sube2/tablesTr.html">Şaşmaz Şubesi</a>
                         <!-- <a class="collapse-item" href="cards.html">Images</a>
                         <a class="collapse-item" href="cards.html">Price</a> -->
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <a class="collapse-item" href="../Sube3/tablesTr.html">Balgat Şubesi, Şube-3</a> -->
+                        <!-- <a class="collapse-item" href="Sube3/tablesTr.html">Balgat Şubesi, Şube-3</a> -->
                         <a class="collapse-item" href="../Sube3/tablesTr.html">Balgat Şubesi</a>
                         <!-- <a class="collapse-item" href="cards.html">Images</a>
                         <a class="collapse-item" href="cards.html">Price</a> -->
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <a class="collapse-item" href="../Sube4/tablesTr.html"> Macunköy Şubesi, Şube-4</a> -->
+                        <!-- <a class="collapse-item" href="Sube4/tablesTr.html"> Macunköy Şubesi, Şube-4</a> -->
                         <a class="collapse-item" href="../Sube4/tablesTr.html">Macunköy Şubesi</a>
                         <!-- <a class="collapse-item" href="cards.html">Images</a>
                         <a class="collapse-item" href="cards.html">Price</a> -->
                     </div>
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <a class="collapse-item" href="../Sube5/tablesTr.html">Cebeci Şubesi, Şube-5</a> -->
+                        <!-- <a class="collapse-item" href="Sube5/tablesTr.html">Cebeci Şubesi, Şube-5</a> -->
                         <a class="collapse-item" href="../Sube5/tablesTr.html">Cebeci Şubesi</a>
                         <!-- <a class="collapse-item" href="cards.html">Images</a>
                         <a class="collapse-item" href="cards.html">Price</a> -->
                     </div>
                 </div>
             </li>
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="../img/rocket.png" alt="...">
+                <p class="text-center mb-2" id="last_status">Lisans Bitiş Tarihi <br>
+                <a class="btn btn-success btn-sm" href="#!" onclick="demo()">01.10.2025</a></p>
+            </div>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -124,12 +130,23 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow border-bottom-primary">
-                    <h1 class="h3 mb-0 text-gray-800"> Menü Ayarları</h1>
-            </nav>
+                    <img src="../img/logo.png" height="60px" style="border-radius: 50%;"> 
+                    <h1 class="h3 mb-0 text-gray-800"> Bolumangal Balgat - Yönetim Paneli</h1>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bolu Mangal Admin</span>
+                                <img class="img-profile rounded-circle"
+                                    src="../img/undraw_profile.svg">
+                            </a>
+                        </li>
+                    </ul>     
+                </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="visibility: hidden;" id="tablokisimlari">
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -137,8 +154,15 @@
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 class="h3 mb-0 text-gray-800"> Kategori, Menü ve Fiyat Yönetimi </h1> 
                             </div>
-                            <button type="button" class="btn btn-info" onclick="newmenu()">Yeni Menü Ekle</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-success" onclick="newmenu()">Yeni Menü Ekle</button> &nbsp;&nbsp;
                             <button type="button" class="btn btn-warning" onclick="newcategory()">Yeni Kategori Ekle</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger" onclick="ordercategory()">Kategori Sırala</button> &nbsp;&nbsp;
+                            <!-- <button type="button" class="btn btn-warning" onclick="deletecategory()">Delete Categories</button> -->
+                        </div>
+                        <div class="card-header py-3" id="categories_filter">
+                            <!-- <button type="button" class="btn btn-info" onclick="newmenu()">Yeni Menü Ekle</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-warning" onclick="newcategory()">Yeni Kategori Ekle</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger" onclick="ordercategory()">Kategori Sırala</button> &nbsp;&nbsp; -->
                             <!-- <button type="button" class="btn btn-warning" onclick="deletecategory()">Delete Categories</button> -->
                         </div>
                         
@@ -208,6 +232,57 @@
     <script src="../js/sb-admin-2.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
     <script src="main_scripts.js"></script>
+    <script>
+        var tablokisimlari = document.getElementById("tablokisimlari")
+        var lg = localStorage.getItem("lg");
+        if (lg === "basarili"){
+            tablokisimlari.style.visibility = "visible"
+        }else {
+            tablokisimlari.style.visibility = "hidden"
+            initialize()
+        }
+        
+        function initialize(){
+            var tablokisimlari = document.getElementById("tablokisimlari")
+
+            Swal.fire({
+                title: "Menü Erişim",
+                html:'<input type="text" class="form-control" id="klcd" aria-describedby="Categories" placeholder="Kullanıcı Adı"> <br>'+
+                    '<input type="password" class="form-control" id="sfr" aria-describedby="Name" placeholder="Şifre"> <br>',
+                    // '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
+                imageUrl: '../img/logo.png',
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showCancelButton: true,
+                confirmButtonText: 'Giriş',
+                cancelButtonText: 'İptal',
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var klcd = document.getElementById("klcd").value;
+                        var sfr = document.getElementById("sfr").value
+                        var chck = document.getElementById("flexCheckDefault")
+                        if (klcd === "bolu"  && sfr  === "Rö01011955") {
+                            console.log("girisbasarili")
+                            tablokisimlari.style.visibility = "visible"
+                            localStorage.setItem("lg", "basarili");
+                        }
+                        else{
+                            tablokisimlari.style.visibility = "hidden"
+                            Swal.fire({
+                                title: "Giriş Başarısız",
+                                text: "Kullanıcı Adı veya Şifre Yanlış",
+                                icon: "error"
+                            }).then((result) => {
+                                localStorage.setItem("lg", 0);
+                                initialize()
+                            });
+                        }
+                    }
+            })
+        }
+        </script>
 </body>
 
 </html>

@@ -1,14 +1,14 @@
 //Configs
 //DB-1 Config
-var config = { 
-    apiKey: "AIzaSyDwzi9ETDKbMTkP4lWkAnd2Di6oMBSmA10",
-    authDomain: "bolumangalkeyfi-63388.firebaseapp.com",
-    databaseURL: "https://bolumangalkeyfi-63388-default-rtdb.firebaseio.com",
-    projectId: "bolumangalkeyfi-63388",
-    storageBucket: "bolumangalkeyfi-63388.appspot.com",
-    messagingSenderId: "547222676335",
-    appId: "1:547222676335:web:efa725ed4782066ac03e9a"
-};
+var config = {
+    apiKey: "AIzaSyDaldjIsm93aZluwjMnLzJ8Kxoeur_qayk",
+    authDomain: "moloko-01.firebaseapp.com",
+    databaseURL: "https://moloko-01-default-rtdb.firebaseio.com",
+    projectId: "moloko-01",
+    storageBucket: "moloko-01.appspot.com",
+    messagingSenderId: "632037249924",
+    appId: "1:632037249924:web:5ed05b7d47a0a5a76983d1"
+  };
 
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -95,7 +95,7 @@ function update(d){
             var keys = test.split("**")[0]
             var  others = local_storage
             if (file === undefined) {
-                Swal.fire("Güncelleniyor Bekleyiniz.", '', 'info')
+                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -118,7 +118,7 @@ function update(d){
                         // location.reload();
                     })
               } else {
-                Swal.fire("Güncelleniyor Bekleyiniz.", '', 'info')
+                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
                 var path = categories + "/" + name
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
@@ -230,7 +230,7 @@ function newmenu(){
             var file = undefined
             var path = categories + "/" + name
             if (file === undefined) {
-                    Swal.fire("Ekleniyor Bekleyiniz.", '', 'info')
+                    Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                     var to_save = firebase.database().ref();
                     var data =     
                         {
@@ -249,7 +249,7 @@ function newmenu(){
                         Swal.fire("Menü Eklendi. Sube-1", '', 'info')
                     })
               }else{
-                Swal.fire("Ekleniyor Bekleyiniz.", '', 'info')
+                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
                 var to_save_image = firebase.storage().ref(path)
                 let thisRef = to_save_image.child(file.name)
                 var others = local_storage
