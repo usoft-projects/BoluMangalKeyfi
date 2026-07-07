@@ -1,487 +1,432 @@
 //Configs
 //DB-1 Config
 var config = {
-    databaseURL: "https://bolumangal-balgat-default-rtdb.firebaseio.com",
-    apiKey: "AIzaSyDwRmD6nOX-qxw_pV8nHIz-rSOf418Jfa0",
-    authDomain: "bolumangal-balgat.firebaseapp.com",
-    projectId: "bolumangal-balgat",
-    storageBucket: "bolumangal-balgat.appspot.com",
-    messagingSenderId: "535471707798",
-    appId: "1:535471707798:web:db2b2d561f66fa6440d4b7"
+      databaseURL: "https://bolumangal-balgat-default-rtdb.firebaseio.com",
+      apiKey: "AIzaSyDwRmD6nOX-qxw_pV8nHIz-rSOf418Jfa0",
+      authDomain: "bolumangal-balgat.firebaseapp.com",
+      projectId: "bolumangal-balgat",
+      storageBucket: "bolumangal-balgat.appspot.com",
+      messagingSenderId: "535471707798",
+      appId: "1:535471707798:web:db2b2d561f66fa6440d4b7"
 };
 
 firebase.initializeApp(config);
 var database = firebase.database();
 var ref = firebase.database().ref();
 
-var local_storage = []
-var keys2 =[]
+var local_storage = [];
+var keys2 = [];
+
 ref.on("value", function(snapshot) {
-    var interface = document.getElementById("data_firebase")
-    var test = snapshot.val()
+    var interface = document.getElementById("data_firebase");
+    var test = snapshot.val();
+    
+    if(!test) return;
+
     var keys = Object.keys(test);
-    keys2=keys
-    var datas =  Object.values(test)  
-    local_storage = test
-    num = 5 + "test"
+    keys2 = keys;
+    var datas = Object.values(test);  
+    local_storage = test;
 
-    //burası card.html ıcın
-    // for(var i=0; i<keys.length; i++){
-    //     var header =  '<div class="col-lg-6"> <div class="card shadow mb-4"> <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> '+
-    //     '<h6 class="m-0 font-weight-bold text-primary">'+keys[i]+'</h6> <div class="dropdown no-arrow">Save and Other Options <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-    //     '<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> </a> <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"  aria-labelledby="dropdownMenuLink">'+
-    //     '<div class="dropdown-header">Settings:</div> <a class="dropdown-item" href="#">Add New Menu</a> <a class="dropdown-item" href="#">Save Categories</a> <a class="dropdown-item" href="#">Delete Items</a> <a class="dropdown-item" href="#">Delete Categories</a> <a class="dropdown-item" href="#">Change Categories Name</a>'+
-    //     '</div> </div> </div><div id="datas_menus"></div>' 
-
-    //     var insider = ""
-    //     for(var k=0; k<datas[i].length; k++){
-    //         insider += '<div class="card-body">  <input class="form-control" type="text" value="'+datas[i][k].name+
-    //         '" id="'+datas[i][k].name+'"><br><input class="form-control" type="text" value="'+datas[i][k].details+'" id="'+datas[i][k].details+'"><br><input class="form-control" type="number" value="'+
-    //         datas[i][k].price+'" id="'+datas[i][k].price+'"></div><hr>'
-    //     }
-    //     interface.innerHTML += header + insider +'</div> </div>'
-    // }
-    //card html son
-    var categories_filter = document.getElementById("categories_filter")
-    for(var i=1; i<keys.length; i++){
+    // Kategori Filtre Butonları
+    var categories_filter = document.getElementById("categories_filter");
+    categories_filter.innerHTML = "";
+    for(var i = 1; i < keys.length; i++) {
         if (keys[i].match(/\s/)) {
             var myArray = keys[i].split(" ");
-            categories_filter.innerHTML += '<a href="#'+myArray[0]+'"><button type="button" class="btn btn-info">'+keys[i]+'</button> </a>&nbsp;&nbsp';
-        }else{
-            categories_filter.innerHTML += '<a href="#'+keys[i]+'"><button type="button" class="btn btn-info">'+keys[i]+'</button> </a>&nbsp;&nbsp';
+            categories_filter.innerHTML += '<a href="#'+myArray[0]+'"><button type="button" class="btn btn-info mb-1">'+keys[i]+'</button> </a>&nbsp;&nbsp;';
+        } else {
+            categories_filter.innerHTML += '<a href="#'+keys[i]+'"><button type="button" class="btn btn-info mb-1">'+keys[i]+'</button> </a>&nbsp;&nbsp;';
         }
     }
 
-
-    var interface_2 = document.getElementById("datas_menu")
-    for(var i=1; i<keys.length; i++){
-        for(var k=0; k<datas[i].length; k++){
-            interface_2.innerHTML += '<div id='+keys[i]+'><tr> <td  id="'+datas[i][k].image+'" onclick=image_view(this)>'+keys[i]+'</td><td>'+datas[i][k].name+'</td><td>'+datas[i][k].details+'</td><td>'+datas[i][k].price+'</td><td>'+
-            '<i class="fas fa-edit" style="color:green;" id="'+keys[i] +'**'+ datas[i][k].name+'**'+datas[i][k].details+'**'+datas[i][k].price+'**'+k+'**'+datas[i][k].image+'" onClick=update(this)></i>&nbsp;&nbsp;' +
-            '<i class="fas fa-trash-alt" style="color:red;"  id="'+keys[i] +'**'+ datas[i][k].name+'**'+datas[i][k].details+'**'+datas[i][k].price+'**'+k+'**'+datas[i][k].image+'" onClick=remove(this)></i> </td></tr></div>'
+    // Tabloyu Oluşturma
+    var interface_2 = document.getElementById("datas_menu");
+    interface_2.innerHTML = "";
+    
+    for(var i = 1; i < keys.length; i++) {
+        for(var k = 0; k < datas[i].length; k++) {
+            var item = datas[i][k];
+            // ID olarak sadece Kategori ve İndeks numarasını iletiyoruz, veriyi local_storage'dan çekeceğiz.
+            var safeId = keys[i] + "**" + k;
+            
+            interface_2.innerHTML += `
+            <tr id="${keys[i]}"> 
+                <td>${keys[i]}</td>
+                <td>${item.name}</td>
+                <td>${item.details || '-'}</td>
+                <td>${item.price} TL</td>
+                <td>
+                    <i class="fas fa-edit" style="color:green; cursor:pointer;" id="${safeId}" onClick="update(this)" title="Düzenle"></i>&nbsp;&nbsp;
+                    <i class="fas fa-trash-alt" style="color:red; cursor:pointer;" id="${safeId}" onClick="remove(this)" title="Sil"></i> 
+                </td>
+            </tr>`;
         }
     }
-
 }, function (error) {
     console.log("Error: " + error.code);
 });
 
-//test.split("**")[0] --> key or categories
+// GÜNCELLEME FONKSİYONU
+function update(d) { 
+    var category = d.id.split("**")[0];
+    var index = parseInt(d.id.split("**")[1]);
+    
+    // Tüm veriyi global depodan güvenle çek
+    var item = local_storage[category][index];
 
-//test.split("**")[1] --> name of menu
+    // Boş (undefined) gelme ihtimaline karşı varsayılan değer atamaları
+    var safeName = item.name || "";
+    var safeDetails = item.details || "";
+    var safePrice = item.price || "";
+    var safePortion = item.portion || "";
+    var safeCalories = item.calories || "";
+    var safeProtein = item.protein || "";
+    var safeCarbs = item.carbs || "";
+    var safeFat = item.fat || "";
+    var safeIngredients = item.ingredients || "";
+    var safeAllergens = item.allergens || "";
+    var safeImage = item.image || "";
 
-//test.split("**")[2] --> details of menu
-
-//test.split("**")[3] --> price of menu
-
-//test.split("**")[4] --> image of menu
-
-
-
-function update(d){ 
-    var test = d.id
     Swal.fire({
-        title: test.split("**")[0]+ ', '+test.split("**")[1],
-        html:'<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="isim" value="'+test.split("**")[1]+'"> <br>'+
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik" value="'+test.split("**")[2]+'"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" value="'+test.split("**")[3]+'"><br>',
-            // '<label class="btn btn-warning">  Resim Seçiniz  <input type="file" id="files" name="files[]" hidden> </label>',
-        imageUrl: test.split("**")[5],
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
+        title: category + ' <br><small style="color:#666;">' + safeName + ' Güncelle</small>',
+        html: `
+            <div class="text-left" style="font-size: 14px;">
+                <label class="mb-0 font-weight-bold">İsim</label>
+                <input type="text" class="form-control mb-2" id="name" value="${safeName}"> 
+                
+                <label class="mb-0 font-weight-bold">Açıklama</label>
+                <input type="text" class="form-control mb-2" id="details" value="${safeDetails}"> 
+                
+                <label class="mb-0 font-weight-bold">Fiyat (TL)</label>
+                <input type="number" class="form-control mb-3" id="price" value="${safePrice}">
+                
+                <hr>
+                <h6 class="font-weight-bold text-primary">Besin Değerleri ve Detaylar</h6>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label class="mb-0">Porsiyon</label>
+                        <input type="text" class="form-control" id="portion" placeholder="Örn: 200 gr" value="${safePortion}">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="mb-0">Kalori</label>
+                        <input type="number" class="form-control" id="calories" placeholder="kcal" value="${safeCalories}">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="mb-0">Protein (g)</label>
+                        <input type="number" class="form-control" id="protein" value="${safeProtein}">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="mb-0">Karb. (g)</label>
+                        <input type="number" class="form-control" id="carbs" value="${safeCarbs}">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="mb-0">Yağ (g)</label>
+                        <input type="number" class="form-control" id="fat" value="${safeFat}">
+                    </div>
+                </div>
+                
+                <label class="mb-0 mt-2 font-weight-bold">Ürün İçeriği</label>
+                <textarea class="form-control mb-2" id="ingredients" rows="2" placeholder="Dana eti, soğan...">${safeIngredients}</textarea>
+                
+                <label class="mb-0 font-weight-bold text-danger">Alerjen Durumu</label>
+                <input type="text" class="form-control mb-2" id="allergens" placeholder="Gluten içerir..." value="${safeAllergens}">
+            </div>
+        `,
+        width: 600,
         showCancelButton: true,
         confirmButtonText: 'Güncelle',
         cancelButtonText: 'Vazgeç',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        confirmButtonColor: '#1cc88a'
+    }).then((result) => {
         if (result.isConfirmed) {
-            local_storage = (JSON.stringify(local_storage))
-            local_storage = (JSON.parse(local_storage))
-            var index = parseInt(test.split("**")[4])
-            var categories = test.split("**")[0];
-            var name = document.getElementById("name").value
-            var details = document.getElementById("details").value
-            var price = document.getElementById("price").value
-            // var file = document.getElementById("files").files[0]
-            var file = undefined
-            var link_image = test.split("**")[5]
-            var keys = test.split("**")[0]
-            var  others = local_storage
-            if (file === undefined) {
-                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
-                    var to_save = firebase.database().ref();
-                    var data =     
-                        {
-                        "name": name,
-                        "details": details,
-                        "price": parseFloat(price),
-                        "image": link_image
-                        }
+            local_storage = JSON.parse(JSON.stringify(local_storage)); // Deep copy 
 
-                    local_storage[keys].splice(index,1)
-                    local_storage[categories].splice(index, 0, data);
-                    console.log(local_storage)
-                    to_save.set(local_storage, function () {
-                            Swal.fire("Güncellendi.", '', 'info')
-                            setTimeout(() => {  location.reload() }, 1000);
-                    })
-              } else {
-                Swal.fire("Güncelleniyor Bekleniyiniz.", '', 'info')
-                var path = categories + "/" + name
-                var to_save_image = firebase.storage().ref(path)
-                let thisRef = to_save_image.child(file.name)
-                var  others = local_storage
-                local_storage[categories].splice(index,1)
-                thisRef.put(file).then(res=>{
-                    Swal.fire("Resim Yüklendi. Lütfen bekleyiniz.", '', 'warning')
-                    to_save_image.child(file.name).getDownloadURL().then(url=>{
-                            var to_save = firebase.database().ref();
-                            var data =     
-                                {
-                                "name": name,
-                                "details": details,
-                                "price": parseFloat(price),
-                                "image": url
-                                }
-                            
-                            local_storage[categories].splice(index, 0, data);
-                            console.log(local_storage)
-                            to_save.set(local_storage, function () {
-                                Swal.fire("Güncellendi.", '', 'info')
-                                setTimeout(() => {  location.reload() }, 1000)
-                            })
-                    })
-                }).catch(e =>{
-                    console.log("Error" + e)
-                    Swal.fire("Hata"+e, '', 'warning')				
-                })
-              }
-        } else if (result.isDenied) {
-          Swal.fire('İptal Edildi.', '', 'info') 
+            var newData = {
+                name: document.getElementById("name").value,
+                details: document.getElementById("details").value,
+                price: parseFloat(document.getElementById("price").value),
+                portion: document.getElementById("portion").value,
+                calories: document.getElementById("calories").value,
+                protein: document.getElementById("protein").value,
+                carbs: document.getElementById("carbs").value,
+                fat: document.getElementById("fat").value,
+                ingredients: document.getElementById("ingredients").value,
+                allergens: document.getElementById("allergens").value,
+                image: safeImage // Mevcut resmi koru
+            };
+
+            Swal.fire("Güncelleniyor. Lütfen Bekleyiniz...", '', 'info');
+            var to_save = firebase.database().ref();
+            
+            local_storage[category][index] = newData;
+            
+            to_save.set(local_storage, function () {
+                Swal.fire("Başarıyla Güncellendi.", '', 'success');
+                setTimeout(() => { location.reload() }, 1000);
+            });
         }
-      })
+    });
 }
 
-
+// SİLME FONKSİYONU
 function remove(d){
-    var test = d.id
-    var keys = test.split("**")[0]
-    var link_image = test.split("**")[5]
-    local_storage = (JSON.stringify(local_storage))
-    local_storage = (JSON.parse(local_storage))
-    var index = parseInt(test.split("**")[4])
-    var to_save = firebase.database().ref();
-    Swal.fire({
-        title: test.split("**")[0]+ ', '+test.split("**")[1],
-        text: 'Menüyü silmek istediğinize emin misiniz?',
-        imageUrl: link_image,
-        imageWidth: 400,
-        imageHeight: 200,
-        showCancelButton: true,
-        confirmButtonText: 'Evet, Sil ',
-        cancelButtonText: 'Vazgeç'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            var uzunluk = local_storage[keys].length
-            if(uzunluk === 1){
-                local_storage[keys].splice(index,1)
-                var ref = firebase.database().ref()
-                ref.set(local_storage, function () {
-                    var new_test = Object.keys(local_storage)
-                    var remove_value = new_test.splice(0, 1);
-                    local_storage["1Configurations"] = new_test
-                    to_save.set(local_storage, function () {
-                        Swal.fire("Kategori Silindi. <br> Yeni Kategori Sıralaması Yapmayı Unutmayın.", '', 'info')
-                        setTimeout(() => {  location.reload() }, 4500);
-                    })  
-                })
-            }else{
-                local_storage[keys].splice(index,1)
-                var ref = firebase.database().ref()
-                ref.set(local_storage, function () {
-                    Swal.fire("Menü Silindi.", '', 'info')
-                    setTimeout(() => {  location.reload() }, 1500);
-                })
-            }
+    var category = d.id.split("**")[0];
+    var index = parseInt(d.id.split("**")[1]);
+    var itemName = local_storage[category][index].name;
 
+    Swal.fire({
+        title: category,
+        html: `<b>${itemName}</b> adlı menüyü silmek istediğinize emin misiniz?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Evet, Sil',
+        cancelButtonText: 'Vazgeç',
+        confirmButtonColor: '#e74a3b'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            local_storage = JSON.parse(JSON.stringify(local_storage));
+            var to_save = firebase.database().ref();
+            
+            var uzunluk = local_storage[category].length;
+            
+            if(uzunluk === 1){
+                // Eğer kategorideki son elemansa kategoriyi de temizler
+                local_storage[category].splice(index, 1);
+                var new_test = Object.keys(local_storage);
+                new_test.splice(new_test.indexOf("1Configurations"), 1); // Configs ayır
+                local_storage["1Configurations"] = new_test;
+                
+                to_save.set(local_storage, function () {
+                    Swal.fire("Kategori Tamamen Silindi.", 'Kategori sıralamasını güncellemeyi unutmayın.', 'info');
+                    setTimeout(() => { location.reload() }, 2000);
+                });
+            } else {
+                local_storage[category].splice(index, 1);
+                to_save.set(local_storage, function () {
+                    Swal.fire("Menü Silindi.", '', 'success');
+                    setTimeout(() => { location.reload() }, 1000);
+                });
+            }
         }
-      })
+    });
 }
 
-
-
+// YENİ MENÜ EKLEME
 function newmenu(){
-    console.log(keys2)
-    var drop = '<select class="form-select btn btn-info " aria-label="Please Select Categories" id="categories">'+
-                '<option selected>Lütfen Kategori Seçiniz</option>'
-    for(var i=1;i<keys2.length;i++){
-        drop += '<option value="'+keys2[i]+'">'+keys2[i]+'</option>'
+    var drop = '<select class="form-control mb-3 font-weight-bold text-primary" id="categories"><option selected disabled>Lütfen Kategori Seçiniz</option>';
+    for(var i = 1; i < keys2.length; i++){
+        drop += '<option value="' + keys2[i] + '">' + keys2[i] + '</option>';
     }
-    drop += '</select>'
+    drop += '</select>';
 
     Swal.fire({ 
         title: "Yeni Menü Ekle",
-        html: drop +'<br><br>'+
-            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İsim"> <br>'+
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat" ><br>',
-            // '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
-        imageUrl: '../img/logo.png',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
+        html: `
+            ${drop}
+            <div class="text-left" style="font-size: 14px;">
+                <input type="text" class="form-control mb-2" id="name" placeholder="Ürün İsmi">
+                <input type="text" class="form-control mb-2" id="details" placeholder="Açıklama">
+                <input type="number" class="form-control mb-3" id="price" placeholder="Fiyat (TL)">
+                
+                <hr>
+                <h6 class="font-weight-bold text-primary">Besin Değerleri ve Detaylar</h6>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" id="portion" placeholder="Porsiyon (200 gr)">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="number" class="form-control" id="calories" placeholder="Kalori (kcal)">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="number" class="form-control" id="protein" placeholder="Protein (g)">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="number" class="form-control" id="carbs" placeholder="Karb (g)">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="number" class="form-control" id="fat" placeholder="Yağ (g)">
+                    </div>
+                </div>
+                
+                <textarea class="form-control mt-2 mb-2" id="ingredients" rows="2" placeholder="Ürün İçeriği (Dana eti, tuz...)"></textarea>
+                <input type="text" class="form-control mb-2" id="allergens" placeholder="Alerjen Durumu (Gluten içerir...)">
+            </div>
+        `,
+        width: 600,
         showCancelButton: true,
-        confirmButtonText: 'Evet, Kaydet',
+        confirmButtonText: 'Kaydet',
         cancelButtonText: 'Vazgeç',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        confirmButtonColor: '#4e73df'
+    }).then((result) => {
         if (result.isConfirmed) {
-            local_storage = (JSON.stringify(local_storage))
-            local_storage = (JSON.parse(local_storage))
+            local_storage = JSON.parse(JSON.stringify(local_storage));
+            
             var select = document.getElementById("categories");
-            var categories = select.options[select.selectedIndex].value;
-            var name = document.getElementById("name").value
-            var details = document.getElementById("details").value
-            var price = document.getElementById("price").value
-            // var file = document.getElementById("files").files[0]
+            var category = select.options[select.selectedIndex].value;
+            
+            if(category === "Lütfen Kategori Seçiniz") {
+                Swal.fire("Hata", "Lütfen bir kategori seçiniz!", "error");
+                return;
+            }
 
-            var file = undefined
-            var path = categories + "/" + name
-            if (file === undefined) {
-                    Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
-                    var to_save = firebase.database().ref();
-                    var data =     
-                        {
-                        "name": name,
-                        "details": details,
-                        "price": parseFloat(price),
-                        "image": ""
-                        }
+            var newData = {
+                name: document.getElementById("name").value,
+                details: document.getElementById("details").value,
+                price: parseFloat(document.getElementById("price").value || 0),
+                portion: document.getElementById("portion").value,
+                calories: document.getElementById("calories").value,
+                protein: document.getElementById("protein").value,
+                carbs: document.getElementById("carbs").value,
+                fat: document.getElementById("fat").value,
+                ingredients: document.getElementById("ingredients").value,
+                allergens: document.getElementById("allergens").value,
+                image: ""
+            };
 
-                    local_storage[categories].push(data)
-                    console.log(local_storage)
-                    to_save.set(local_storage, function () {
-                        Swal.fire("Menü Eklendi.", '', 'info')
-                        setTimeout(() => {  location.reload() }, 1500);
-                    })
-              }else{
-                Swal.fire("Ekleniyor Bekleniyiniz.", '', 'info')
-                var to_save_image = firebase.storage().ref(path)
-                let thisRef = to_save_image.child(file.name)
-                var others = local_storage
-                thisRef.put(file).then(res=>{
-                    Swal.fire("Resim Yüklendi. Lütfen Bekleyiniz.", '', 'warning')
-                    to_save_image.child(file.name).getDownloadURL().then(url=>{
-                            var to_save = firebase.database().ref();
-                            var data =     
-                                {
-                                "name": name,
-                                "details": details,
-                                "price": parseFloat(price),
-                                "image": url
-                                }
-                            
-                            local_storage[categories].push(data)
-                            console.log(local_storage)
-                            to_save.set(local_storage, function () {
-                                Swal.fire("Menü Eklendi", '', 'info')
-                                setTimeout(() => {  location.reload() }, 1500);
-                            })
-                    })
-                }).catch(e =>{
-                    console.log("Error" + e)
-                    Swal.fire("Hata"+e, '', 'warning')				
-                })
+            Swal.fire("Ekleniyor. Lütfen Bekleyiniz...", '', 'info');
+            var to_save = firebase.database().ref();
+            
+            local_storage[category].push(newData);
+            
+            to_save.set(local_storage, function () {
+                Swal.fire("Menü Başarıyla Eklendi.", '', 'success');
+                setTimeout(() => { location.reload() }, 1000);
+            });
         }
-        } else if (result.isDenied) {
-          Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
-        } 
-      }) 
+    }); 
 }
 
-   
+// YENİ KATEGORİ EKLEME
 function newcategory(){
     Swal.fire({
         title: "Yeni Kategori Ekle",
-        html:'<input type="text" class="form-control" id="cat" aria-describedby="Categories" placeholder="Kategori Adı"> <br>'+
-            '<input type="text" class="form-control" id="name" aria-describedby="Name" placeholder="İlk Menü Adı"> <br>'+ 
-            '<input type="text" class="form-control" id="details" aria-describedby="Details" placeholder="İçerik"> <br>'+
-            '<input type="number" class="form-control" id="price" aria-describedby="Price" placeholder="Fiyat"> <br>',
-            // '<label class="btn btn-warning">  Resim Seçiniz <input type="file" id="files" name="files[]" hidden> </label>',
-        imageUrl: '../img/logo.png',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
+        html: `
+            <div class="text-left" style="font-size: 14px;">
+                <label class="font-weight-bold text-danger">Kategori Adı</label>
+                <input type="text" class="form-control mb-3" id="cat" placeholder="Örn: Tatlılar"> 
+                <hr>
+                <label class="font-weight-bold text-primary">Kategorinin İlk Ürünü</label>
+                <input type="text" class="form-control mb-2" id="name" placeholder="Ürün İsmi">
+                <input type="number" class="form-control mb-3" id="price" placeholder="Fiyat (TL)">
+                
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" id="portion" placeholder="Porsiyon (200 gr)">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="number" class="form-control" id="calories" placeholder="Kalori (kcal)">
+                    </div>
+                </div>
+            </div>
+        `,
+        width: 500,
         showCancelButton: true,
-        confirmButtonText: 'Evet, Kaydet',
+        confirmButtonText: 'Kategoriyi Oluştur',
         cancelButtonText: 'Vazgeç',
-        }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        confirmButtonColor: '#f6c23e'
+    }).then((result) => {
         if (result.isConfirmed) {
-            local_storage = (JSON.stringify(local_storage))
-            local_storage = (JSON.parse(local_storage))
+            local_storage = JSON.parse(JSON.stringify(local_storage));
 
             var cate = document.getElementById("cat").value;
-            var name = document.getElementById("name").value
-            var details = document.getElementById("details").value
-            var price = document.getElementById("price").value
-            // var file = document.getElementById("files").files[0]
-            var file = undefined
-            var path = cate + "/" + name
-            if (file === undefined) {
-                    var to_save = firebase.database().ref();
-                    var data =[
-                        {
-                        "name": name,
-                        "details": details,
-                        "price": parseFloat(price),
-                        "image":""
-                        }
-                    ]
-                    
-                local_storage[cate] = data
-                console.log(local_storage)
-                to_save.set(local_storage, function () {
-                    var new_test = Object.keys(local_storage)
-                    var remove_value = new_test.splice(0, 1);
-                    local_storage["1Configurations"] = new_test
-                    to_save.set(local_storage, function () {
-                        Swal.fire("Yeni kategori eklendi. <br> Yeni Kategori Sıralaması Yapmayı Unutmayın.", '', 'info')
-                        setTimeout(() => {  location.reload() }, 4500);
-                    })   
-                })
+            if(!cate) { Swal.fire("Hata", "Kategori adı boş olamaz!", "error"); return; }
 
-            }else{
-                var to_save_image = firebase.storage().ref(path)
-                let thisRef = to_save_image.child(file.name)
-                thisRef.put(file).then(res=>{
-                    Swal.fire("Resim Yüklendi. Lütfen Bekleyiniz.", '', 'warning')
-                    to_save_image.child(file.name).getDownloadURL().then(url=>{
-                            var to_save = firebase.database().ref();
-                            var data =[
-                                {
-                                "name": name,
-                                "details": details,
-                                "price": parseFloat(price),
-                                "image":url
-                                }
-                            ]
-                            
-                        local_storage[cate] = data
-                        console.log(local_storage)
-                        to_save.set(local_storage, function () {
-                            var new_test = Object.keys(local_storage)
-                            var remove_value = new_test.splice(0, 1);
-                            local_storage["1Configurations"] = new_test
-                            to_save.set(local_storage, function () {
-                                Swal.fire("Yeni kategori eklendi. <br> Yeni Kategori Sıralaması Yapmayı Unutmayın.", '', 'info')
-                                setTimeout(() => {  location.reload() }, 4500);
-                            })   
-                        })
-                    })
-                }).catch(e =>{
-                    console.log("Error" + e)				
-                })
+            var newData = [{
+                name: document.getElementById("name").value,
+                details: "",
+                price: parseFloat(document.getElementById("price").value || 0),
+                portion: document.getElementById("portion").value,
+                calories: document.getElementById("calories").value,
+                protein: "",
+                carbs: "",
+                fat: "",
+                ingredients: "",
+                allergens: "",
+                image: ""
+            }];
 
+            var to_save = firebase.database().ref();
+            local_storage[cate] = newData;
+            
+            // Konfigürasyonu Güncelle
+            var new_test = Object.keys(local_storage);
+            new_test.splice(new_test.indexOf("1Configurations"), 1);
+            local_storage["1Configurations"] = new_test;
+
+            to_save.set(local_storage, function () {
+                Swal.fire("Kategori Eklendi.", 'Lütfen kategori sırasını düzenlemeyi unutmayın.', 'success');
+                setTimeout(() => { location.reload() }, 2000);
+            });
         }
-
-        } else if (result.isDenied) {
-            Swal.fire('Değişiklikler kaydedilemedi.', '', 'info') 
-        }
-        })
-
+    });
 }
 
-// function deletecategory(){
-//     Swal.fire('developing...', '', 'info') 
-// }
-// function image_view(d){
-//     var url = d.id
-//     Swal.fire({
-//         title: "Menü Resmi",
-//         imageUrl: url,
-//         imageWidth: 400,
-//         imageHeight: 200,
-//         imageAlt: 'Custom image',
-//         showCloseButton: true,
-//         showCancelButton: false,
-//         confirmButtonText:'Kapat.',
-//         })
-
-// }
 function usoft(){
     Swal.fire({
         toast: true,
         title: 'USoft - <b><u>USoft the clear choice</b></u> ',
-        html:"You can reach us at <a href='mailto:usoft.projects@gmail.com'><b><u> this address.</b></u></a> <br> <p>&copy;Copyright 2023. All Rights Reserved.</p>",
+        html: "You can reach us at <a href='mailto:usoft.projects@gmail.com'><b><u> this address.</b></u></a> <br> <p>&copy;Copyright 2023. All Rights Reserved.</p>",
         imageUrl: '../img/rocket.png',
         imageAlt: 'Custom image',
-      });
+    });
 }
 
 function ordercategory(){
+    local_storage = JSON.parse(JSON.stringify(local_storage));
     var to_save = firebase.database().ref();
-    const category_order = []
+    const category_order = [];
 
-    local_storage = (JSON.stringify(local_storage))
-    local_storage = (JSON.parse(local_storage))
-
-    console.log(local_storage)
-
-    var div_drop =''
-    for(var k = 1; k<keys2.length; k++){
-        var drop = '<div style="padding-bottom:8px;"><select class="form-select btn btn-info " aria-label="Please Select Categories" id="categries'+k.toString()+'" >'+
-        '<option selected>Lütfen Kategori Sırası Seçiniz </option>'
-        for(var i=1;i<keys2.length;i++){
-            drop += '<option value="'+keys2[i]+'">'+keys2[i]+'</option>'
+    var div_drop = '';
+    for(var k = 1; k < keys2.length; k++){
+        var drop = '<div class="mb-2"><select class="form-control font-weight-bold text-primary" id="categries' + k + '">'+
+        '<option selected disabled>'+ k +'. Sıradaki Kategori</option>';
+        for(var i = 1; i < keys2.length; i++){
+            drop += '<option value="' + keys2[i] + '">' + keys2[i] + '</option>';
         }
-        drop += '</select>'
-        div_drop += drop + '<br></div>'
+        drop += '</select></div>';
+        div_drop += drop;
     }
+    
     Swal.fire({
         title: "Kategori Sıralama",
-        html:div_drop,
-        imageUrl: '../img/logo.png',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
+        html: div_drop,
+        width: 500,
         showCancelButton: true,
-        confirmButtonText: 'Kaydet',
+        confirmButtonText: 'Sıralamayı Kaydet',
         cancelButtonText: 'Vazgeç',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                for(var i=1; i<keys2.length;i++){
-                    var id_value = 'categries' + i.toString()
-                    var select = document.getElementById(id_value);
-                    var categories = select.options[select.selectedIndex].value;
-                    category_order.push(categories)
-                }
-                console.log(category_order)
-                const unique = Array.from(new Set(category_order));
-                console.log(unique)
-                if(category_order.length === unique.length) {
-                    console.log("aynı veri icermiyor");
-                    local_storage["1Configurations"] = category_order
-
-                    to_save.set(local_storage, function () {
-                        Swal.fire("Düzenlendi.", '', 'info')
-                        setTimeout(() => {  location.reload() }, 1000);
-                    })      
-                } else {
-                    Swal.fire("Liste Aynı Kategoriyi İçeremez!", '', 'error')
-                }
+        confirmButtonColor: '#e74a3b'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            for(var i = 1; i < keys2.length; i++){
+                var select = document.getElementById('categries' + i);
+                var category = select.options[select.selectedIndex].value;
+                category_order.push(category);
             }
-        })
-        
+            
+            const unique = Array.from(new Set(category_order));
+            
+            if(category_order.length === unique.length && !category_order.includes("1Configurations")) {
+                local_storage["1Configurations"] = category_order;
+                to_save.set(local_storage, function () {
+                    Swal.fire("Sıralama Düzenlendi.", '', 'success');
+                    setTimeout(() => { location.reload() }, 1000);
+                });      
+            } else {
+                Swal.fire("Hata!", 'Lütfen sıralamayı eksiksiz yapın ve her kategoriyi sadece bir kez seçin.', 'error');
+            }
+        }
+    });
 }
 
 function demo(){
     Swal.fire({
         toast: true,
-        title: '<b>Demo Sürümü</b> ',
-        html:"Demo Bitiş Tarihi: <a href='mailto:usoft.projects@gmail.com'><b><u> 15.03.2023</b></u></a> <br> <p>&copy;Copyright 2023. All Rights Reserved.</p>",
+        title: '<b>Lisans Bilgisi</b>',
+        html: "Lisans Bitiş Tarihi: <b>01.10.2025</b>",
         imageUrl: '../img/rocket.png',
         imageAlt: 'Custom image',
-      });
+    });
 }

@@ -1,5 +1,26 @@
+// Sayfa yüklendiğinde global olarak çalışacak Pop-up Fonksiyonumuz (İçerik ve Alerjen bilgisi için)
+window.showProductDetails = function(name, ingredients, allergens) {
+    Swal.fire({
+        title: name,
+        html: `
+            <div class="text-start mt-3" style="font-size: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                <p class="mb-3">
+                    <strong style="color: #ffb03b; font-size: 16px;"><i class="bi bi-info-square-fill me-2"></i>ÜRÜN İÇERİĞİ:</strong><br> 
+                    <span style="color: #555;">${ingredients}</span>
+                </p>
+                <p class="mb-0">
+                    <strong style="color: #d33; font-size: 16px;"><i class="bi bi-exclamation-triangle-fill me-2"></i>ALERJEN DURUMU:</strong><br> 
+                    <span style="color: #555;">${allergens}</span>
+                </p>
+            </div>
+        `,
+        confirmButtonColor: '#ffb03b',
+        confirmButtonText: 'Kapat',
+        width: '400px'
+    });
+}
 
-function init(){
+function init() {
     var config = {
       apiKey: "AIzaSyCNpifrazADwoJ85eWUrts9u1aQMxSIENU",
       authDomain: "bolumangal-cayyolu.firebaseapp.com",
@@ -8,130 +29,150 @@ function init(){
       storageBucket: "bolumangal-cayyolu.appspot.com",
       messagingSenderId: "949653597401",
       appId: "1:949653597401:web:801f7cd85b3e56e74ae2c8"
-    };
-    
-    firebase.initializeApp(config);
-    var database = firebase.database();
-    
-    var ref = firebase.database().ref();
-    var key = []
-    var data = []
-    ref.on("value", function(snapshot) {
-        var list_categories = document.getElementById("menu-flters")
-        var test = snapshot.val()
-        var keys = Object.keys(test);
-        var datas =  Object.values(test) 
-        key =  keys
-        data =  datas
-        // console.log(keys)
-        // console.log(Object.values(test))
-        list_categories.innerHTML = '<li>Tümü</li>'
-        for(var i=0;i<(datas[0].length);i++){
-            list_categories.innerHTML += '<li> <a href="#'+datas[0][i]+'"> '+datas[0][i]+'</a></li>'
-        }
-    
-        var list_menu = document.getElementById("menu_tabs")
-        list_menu.innerHTML = ""
-        console.log(datas[0]) // 1Configurations kısmı
 
-        for(var i=0; i<datas[0].length; i++ ){
-            console.log(datas[0][i])
-            var index_key = keys.indexOf(datas[0][i])
-            console.log(index_key)
-            for(var k=0; k<datas[index_key].length; k++){
-                if (k == 0 ){
-                    list_menu.innerHTML += ' <div class="col-lg-6 menu-item filter-'+datas[0][i]+'" id="'+datas[0][i]+'"> <hr><div style="padding-top:35px;"> <h2>'+datas[0][i]+'</h2>  <div class="menu-content">'+
-                    '<a href="#!">'+datas[index_key][k].name+'</a><span>'+datas[index_key][k].price+' TL</span></div> <div class="menu-ingredients">'+datas[index_key][k].details+'</div></div></div>'    
-                }
-                else{
-                    list_menu.innerHTML += ' <div class="col-lg-6 menu-item filter-'+datas[0][i]+'" id="'+datas[0][i]+'"> <div class="menu-content">'+
-                    '<a href="#!">'+datas[index_key][k].name+'</a><span>'+datas[index_key][k].price+' TL</span></div> <div class="menu-ingredients">'+datas[index_key][k].details+'</div></div>'
+    };
+firebase.initializeApp(config);
+    var ref = firebase.database().ref();
+
+    ref.on("value", function (snapshot) {
+        var list_categories = document.getElementById("menu-flters");
+        var list_menu = document.getElementById("menu_tabs");
+        var test = snapshot.val();
+        
+        if (!test) return;
+
+        var keys = Object.keys(test);
+        var datas = Object.values(test);
+
+        // Kategori Filtrelerini Oluşturma
+        list_categories.innerHTML = '<li data-filter="*" class="filter-active">Tümü</li>';
+        var categories = datas[0]; // Veritabanındaki kategori başlıkları
+        
+        for (var i = 0; i < categories.length; i++) {
+            list_categories.innerHTML += `<li><a href="#category-${categories[i]}" style="color:inherit; text-decoration:none;">${categories[i]}</a></li>`;
+        }
+
+        // Menü İçeriğini Oluşturma
+        list_menu.innerHTML = "";
+
+        for (var i = 0; i < categories.length; i++) {
+            var categoryName = categories[i];
+            var index_key = keys.indexOf(categoryName);
+            
+            if (index_key !== -1 && datas[index_key]) {
+                var categoryItems = datas[index_key];
+
+                // 1. Kategori Başlığı (Tam Satır - col-12)
+                list_menu.innerHTML += `
+                    <div class="col-12 mt-5 mb-3" id="category-${categoryName}">
+                        <div class="section-title" style="padding-bottom: 0;">
+                            <h2 style="font-size: 28px; color: #ffb03b; text-align:left;">${categoryName}</h2>
+                        </div>
+                        <hr style="color: #ffb03b; opacity: 0.5;">
+                    </div>
+                `;
+
+                // 2. Ürün Kartları (İki Sütun - col-lg-6)
+                for (var k = 0; k < categoryItems.length; k++) {
+                    var item = categoryItems[k];
+
+                    // İçerik ve Alerjen verileri (Veri yoksa "Belirtilmemiş" yazar)
+                    var ingr = item.ingredients ? item.ingredients : "Belirtilmemiş";
+                    var allerg = item.allergens ? item.allergens : "Belirtilmemiş";
+
+                    // Besin değerleri ikonlu rozetleri
+                    var portionHtml = item.portion ? `<span class="badge bg-secondary me-1 mb-1"><i class="bi bi-pie-chart-fill me-1"></i>${item.portion}</span>` : '';
+                    var calHtml = item.calories ? `<span class="badge bg-danger me-1 mb-1"><i class="bi bi-fire me-1"></i>${item.calories} kcal</span>` : '';
+                    var proteinHtml = item.protein ? `<span class="badge bg-success me-1 mb-1"><i class="bi bi-egg-fried me-1"></i>${item.protein}g Prt</span>` : '';
+                    var carbHtml = item.carbs ? `<span class="badge bg-warning text-dark me-1 mb-1"><i class="bi bi-basket-fill me-1"></i>${item.carbs}g Karb</span>` : '';
+                    var fatHtml = item.fat ? `<span class="badge bg-info text-dark mb-1"><i class="bi bi-droplet-half me-1"></i>${item.fat}g Yağ</span>` : '';
+
+                    list_menu.innerHTML += `
+                        <div class="col-lg-6 menu-item filter-${categoryName} mb-4">
+                            <div class="menu-content d-flex justify-content-between align-items-center">
+                                <!-- Ürün adı artık tıklanabilir değil, sadece isim olarak görünüyor -->
+                                <a href="#!">${item.name}</a>
+                                <span>${item.price} TL</span>
+                            </div>
+                            <div class="menu-ingredients mb-2">
+                                ${item.details}
+                            </div>
+                            <div class="menu-nutritional-info d-flex flex-wrap mt-2" style="font-size: 0.8rem; opacity: 0.9;">
+                                ${portionHtml}
+                                ${calHtml}
+                                ${proteinHtml}
+                                ${carbHtml}
+                                ${fatHtml}
+                            </div>
+                            <!-- Yeni İçerik ve Alerjen Butonu -->
+                            <div class="mt-2">
+                                <button class="btn btn-sm" style="font-size: 0.75rem; border-radius: 20px; border: 1px solid #ffb03b; color: #ffb03b; background: transparent; padding: 3px 12px; transition: all 0.3s;" onmouseover="this.style.background='#ffb03b'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#ffb03b';" onclick="showProductDetails('${item.name}', '${ingr}', '${allerg}')">
+                                    <i class="bi bi-card-text me-1"></i> İçerik ve Alerjen Detayı
+                                </button>
+                            </div>
+                        </div>
+                    `;
                 }
             }
         }
-        // for(var i=1; i<keys.length;i++){
-        //     for(var k=0; k<datas[i].length;k++){
-                // if (k == 0 ){
-                //     list_menu.innerHTML += ' <div class="col-lg-6 menu-item filter-'+keys[i]+'" id="'+keys[i]+'"> <hr><div style="padding-top:35px;"> <h2>'+keys[i]+'</h2>  <div class="menu-content">'+
-                //     '<a href="#">'+datas[i][k].name+'</a><span>'+datas[i][k].price+' TL</span></div> <div class="menu-ingredients">'+datas[i][k].details+'</div></div></div>'    
-                // }
-                // else{
-                //     list_menu.innerHTML += ' <div class="col-lg-6 menu-item filter-'+keys[i]+'" id="'+keys[i]+'"> <div class="menu-content">'+
-                //     '<a href="#">'+datas[i][k].name+'</a><span>'+datas[i][k].price+' TL</span></div> <div class="menu-ingredients">'+datas[i][k].details+'</div></div>'
-                // }
-        //     }
-        // }
-       
-    },function (error) {
+    }, function (error) {
         console.log("Error: " + error.code);
     });
-    
-    }
-    setTimeout(() => {     init() }, 500);
- 
-    function usoft(){
-        var text =  '        <section id="contact" class="contact" id="conts"> \
-          <div class="container" data-aos="fade-up"> \
-            <div class="section-title"> \
-              <h2>İletişim</h2> \
-              <p>İletişime Geçin</p> \
-            </div> \
-          </div> \
-          <div class="container" data-aos="fade-up"> \
-            <div class="row mt-5"> \
-              <div class="col-lg-4"> \
-                <div class="info"> \
-                  <div class="address"> \
-                    <i class="bi bi-geo-alt"></i> \
-                    <h4>Yer/Konum:</h4> \
-                    <p> Bahçekapı, Bahçekapı Mah.2540 Cad, Şaşmaz Blv. No:9, 06105 Etimesgut/Ankara <br> \
-                      Çalışma Saatleri : 10:00 - 00:00</p> <br>\
-                  </div> \
-                  <div class="phone">\
-                    <i class="bi bi-phone"></i>\
-                    <h4>Telefon:</h4>\
-                    <p>03122151215</p> <br>\
-                  </div>\
-                  <div class="email">\
-                    <i class="bi bi-envelope"></i>\
-                    <h4>Email:</h4>\
-                    <p>--</p>\
-                  </div> <br>\
-                </div>\
-              </div>\
-            </div>\
-          </div> \
-        </section>'
-        Swal.fire({
-            toast: true,
-            html:text   ,
-            imageUrl: '../assets/img/logo.png',
-            imageAlt: 'Custom image',
-          });
-    }
-    
-    setInterval(
-      () => {
-          firebase.database().goOffline();
-          console.log("offline")
-      },
-      10000,
-  )
+}
 
-  setTimeout(
-    () => {
-      Swal.fire({
+setTimeout(() => { init(); }, 500);
+
+function usoft() {
+    var text = `
+    <section id="contact" class="contact" style="padding: 10px;"> 
+        <div class="section-title mb-3"> 
+            <h2>İletişim</h2> 
+            <p>Bize Ulaşın</p> 
+        </div> 
+        <div class="info text-start"> 
+            <div class="address mb-3"> 
+                <i class="bi bi-geo-alt fs-4 text-warning float-start me-3"></i> 
+                <h4>Adres:</h4> 
+                <p style="font-size: 14px;">Bahçekapı Mah. 2540 Cad, Şaşmaz Blv. No:9, Etimesgut/Ankara <br> 
+                <strong>Çalışma Saatleri:</strong> 10:00 - 00:00</p> 
+            </div> 
+            <div class="phone mb-3">
+                <i class="bi bi-phone fs-4 text-warning float-start me-3"></i>
+                <h4>Telefon:</h4>
+                <p style="font-size: 14px;"><a href="tel:03122151215" style="color: inherit;">0312 215 12 15</a></p> 
+            </div>
+        </div> 
+    </section>`;
+    
+    Swal.fire({
+        html: text,
+        imageUrl: '../assets/img/logo.png',
+        imageAlt: 'Bolu Mangal Keyfi',
+        showConfirmButton: true,
+        confirmButtonColor: '#ffb03b',
+        confirmButtonText: 'Kapat'
+    });
+}
+
+// Performans için gereksiz offline'a alma süresini 10sn'den uzatmak veya iptal etmek isteyebilirsin.
+// Şimdilik senin kurgunu korudum fakat süreyi 30 saniyeye çektim.
+setInterval(() => {
+    firebase.database().goOffline();
+    console.log("Database connection set to offline mode to save bandwidth.");
+}, 30000);
+
+setTimeout(() => {
+    Swal.fire({
         title: 'Google\'da bizi puanlamak ister misiniz?',
         showCancelButton: true,
-        confirmButtonText: 'Puanla',
+        confirmButtonColor: '#ffb03b',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '<i class="bi bi-star-fill"></i> Puanla',
         imageUrl: '../assets/img/logo.png',
-        cancelButtonText: 'İptal'
+        cancelButtonText: 'Belki Daha Sonra'
     }).then((result) => {
         if (result.isConfirmed) {
-            const yorum = result.value;
-            window.open('https://www.google.com/search?safe=active&sca_esv=2f8623b159e229b7&sca_upv=1&rlz=1C1GCEU_enTR1089TR1089&q=bolumangal+cayy%C4%B1lu&uds=ADvngMjuOA_8kSPM_k2J8SdxbpvwuIisS9hnmZMtBghRmt2tad6rEzMMcN-SQkS6mAMs-axKb7dv9qiOdRd3QoKIhco8vc_zV0wWxR6rcLpq2Yy4UjwK-m2OX7jcOLw6cpc_AgjHI10d&si=ACC90nwjPmqJHrCEt6ewASzksVFQDX8zco_7MgBaIawvaF4-7mDrAsiwz93wPlk37U6N_YBoR2cKWih2SrbX8EUJjHq68kw5n5qUjP_RM1-cqdXKUdiK8eY%3D&sa=X&ved=2ahUKEwj27MehnO2IAxUtBdsEHXEoE6oQ3PALegQIGxAE&biw=1920&bih=929&dpr=1');
+            window.open('https://www.google.com/search?q=bolu+mangal+keyfi+cayyolu');
         }
     });
-    },
-    25000,
-  )
+}, 25000);
