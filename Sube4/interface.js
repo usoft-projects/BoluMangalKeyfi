@@ -172,7 +172,7 @@ setTimeout(() => {
         cancelButtonText: 'Belki Daha Sonra'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.open('https://www.google.com/search?q=bolu+mangal+keyfi+cayyolu');
+            window.open('https://www.google.com/maps/place/Bolu+Mangal+Keyfi+Macunk%C3%B6y/@39.9466191,32.7635111,17z/data=!4m8!3m7!1s0x14d348fee227da2d:0x81658533001fba0c!8m2!3d39.946615!4d32.766086!9m1!1b1!16s%2Fg%2F11c46k0pt6?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D');
         }
     });
 }, 25000);
