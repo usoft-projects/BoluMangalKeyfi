@@ -167,11 +167,11 @@ setTimeout(() => {
         confirmButtonColor: '#ffb03b',
         cancelButtonColor: '#d33',
         confirmButtonText: '<i class="bi bi-star-fill"></i> Puanla',
-        imageUrl: '../assets/img/logo.png',
+        imageUrl: '../assets/img/sasmaz_logo.jpg',
         cancelButtonText: 'Belki Daha Sonra'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.open('https://www.google.com/search?q=bolu+mangal+keyfi+cayyolu');
+            window.open('https://www.google.com/maps/place/Bolu+Mangal+Keyfi+%C5%9Ea%C5%9Fmaz/@39.9376838,32.7178057,17z/data=!4m8!3m7!1s0x14d337931a33ce5b:0x6cccf940b643a6c0!8m2!3d39.9376838!4d32.7178057!9m1!1b1!16s%2Fg%2F11fm2ml8xk?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D');
         }
     });
 }, 25000);
